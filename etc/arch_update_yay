@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# remnant from when i was using arch
+# i still think it's a pretty good script for yay users
+
+echo "󰣇 time for an update."
+
+while true; do
+    read -p "update mirrors? [y/n] " choice
+    case "${choice,,}" in
+        y | yes)
+            echo "updating mirrorlist..."
+            sudo reflector                          \
+                --country 'United States'           \
+                --protocol https                    \
+                --latest 10                         \
+                --sort rate                         \
+                --verbose                           \
+                --save /etc/pacman.d/mirrorlist
+            break
+            ;;
+        n | no)
+            echo "skipped mirror update."
+            break
+            ;;
+        *)
+            echo "invalid response."
+            ;;
+    esac
+done
+
+echo "backing up package list..."
+yay -Qqe > ~/Documents/pkglist.txt
+
+echo "running full system upgrade..."
+yay -Syu
+
+echo "cleaning orphaned packages..."
+yay -Yc
+
+echo "logging updated kernel version..."
+echo "$(date '+%y%m%d_%I:%M%P') - kernel version: $(uname -r)" >> ~/Documents/kernel_versions.txt
+
+echo "󰣇 arch updated with yay.  "
+echo "compare the last 2 kernel versions to determine if a system reboot is necessary:"
+tail -n 2 ~/Documents/kernel_versions.txt
+
+setsid -f                                                                   \
+    herbe                                                                   \
+        "󰣇 arch updated with yay.  "                                       \
+        " "                                                                 \
+        "$(tail -n 2 ~/Documents/kernel_versions.txt | awk '{print $5}')"   \
+        " "                                                                 \
+        " reboot if kernel was updated."

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+bookmarks="$HOME/.cache/surf/bookmarks"
+
+(
+  xprop -id "$1" "$2" | cut -d '"' -f2 | sed 's/.*https*:\/\/\(www\.\)\?//'
+  cat $bookmarks
+) | awk '!seen[$0]++' > ~/.cache/surf/bookmarks.tmp
+
+mv ~/.cache/surf/bookmarks.tmp $bookmarks
+
+herbe "added $(head -n 1 $bookmarks)" "to ~/.cache/surf/bookmarks"

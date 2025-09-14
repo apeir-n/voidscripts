@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd "$HOME/Documents/obsidian_vault"
+git add .
+git commit -m "[ vaultbackup ][ $(date '+%a_%y%m%d_%I:%M%P') ][ ch_rism_ ]"
+git pull --rebase
+git push
+
+setsid -f herbe " obsidian vault synced with git."

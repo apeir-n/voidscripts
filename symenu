@@ -1,0 +1,12 @@
+#!/bin/bash
+
+dir="$HOME/Documents/menus"
+[ -z "$dir" ] && exit 0
+
+file=$(ls "$dir" | dmenu -bw 3)
+[ -z "$file" ] && exit 0
+
+picked=$(<"$dir/$file" dmenu -bw 3)
+[ -z "$picked" ] && exit 0
+
+printf %s "$picked" | xclip -selection clipboard

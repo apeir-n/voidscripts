@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# add menu asking if i wanna update lang build systems too
+
+VOIDATA="$HOME/Documents/void"
+
+echo "  time for an update."
+
+echo "backing up package list..."
+xpkg -m > $VOIDATA/pkglist.txt
+
+echo "running full system upgrade..."
+doas xbps-install -Su
+
+echo "cleaning orphaned packages..."
+doas xbps-remove -o
+
+echo "updating source tree..."
+cd $HOME/.local/share/void-packages
+git checkout master
+git pull upstream master
+
+echo "logging updated kernel version..."
+echo "$(date '+%y%m%d_%I:%M%P') - kernel version: $(uname -r)" >> $VOIDATA/kernelversions.txt
+
+echo "  void updated.  "
+echo "compare the last 2 kernel versions to determine if a system reboot is necessary:"
+tail -n 2 $VOIDATA/kernelversions.txt
+
+setsid -f                                                               \
+    herbe                                                               \
+        "  void updated.  "                                           \
+        " "                                                             \
+        "$(tail -n 2 $VOIDATA/kernelversions.txt | awk '{print $5}')"   \
+        " "                                                             \
+        " reboot if kernel was updated."

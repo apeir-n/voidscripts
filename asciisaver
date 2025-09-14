@@ -1,0 +1,5 @@
+#!/bin/sh
+
+while true; do
+    xterm -fa "JetBrainsMono Nerd Font" -fs 10 -fullscreen -e $HOME/.local/bin/asciiquarium -t
+done

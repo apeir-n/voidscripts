@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo "beginning language package updater."
+sleep 1
+
+echo "updating python packages with pipx..."
+pipx upgrade-all
+
+echo "updating rust packages with cargo..."
+cargo install-update -a
+
+echo "updating go packages with gup..."
+gup update

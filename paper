@@ -1,0 +1,18 @@
+#!/bin/bash
+
+dir="$HOME/Pictures/wallpapers"
+random="$(find "$dir" -type f \( -iname "*.jpg" -o -iname "*.png" \) | shuf -n 1)"
+name="$(basename $random)"
+
+setsid -f herbe "folding paper with pywal..."
+
+if timeout 6s wal --cols16 -a 40 -i "$random" >/dev/null 2>&1; then
+    xrdb -merge $HOME/.Xresources
+    dwm-msg run_command xrdb
+    #cat "$XDG_CACHE_HOME/wal/qutecol.css" "$XDG_CONFIG_HOME/qutebrowser/styles/qutebase.css" > "$XDG_CONFIG_HOME/qutebrowser/styles/qute.css"
+    setsid -f herbe "paperplane landed  " " " "$name"
+    echo "$(date '+%a_%y%m%d_%I:%M%P'):   paperplane landed at '$name' international" >> "$HOME/.cache/scripts/paperplane.log"
+else
+    setsid -f herbe "  paperplane crashed!" " " "  wallpaper not set."
+    echo "$(date '+%a_%y%m%d_%I:%M%P'):   paperplane crashed into '$name' airport..." >> "$HOME/.cache/scripts/paperplane.log"
+fi

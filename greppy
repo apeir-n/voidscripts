@@ -1,0 +1,49 @@
+#!/bin/sh
+# errors dont seem to show up in everything
+# move lines input into while loop
+# add options to cat the various sub categories
+
+greppy_taily() {
+    doas tail -n "$1" /var/log/socklog/everything/current | grep "$2"
+}
+
+echo " "
+printf "tail length: "
+read taily
+
+while true; do
+    echo " "
+    echo "choose string:"
+    echo " "
+    echo "  [n] nftables"
+    echo "  [m] mpd"
+    echo "  [e] error"
+    echo "  [l] login"
+    echo "  [c] custom"
+    echo "  [x] exit"
+    echo " "
+    printf "choice: "
+    read choice
+    case "$choice" in
+        n) greppy="nftables" ;;
+        m) greppy="mpd"      ;;
+        e) greppy="error"    ;;
+        l) greppy="login"    ;;
+        c)
+            printf "enter item to grep: "
+            read greppy
+            ;;
+        x)
+            echo "goodbye..."
+            exit 0
+            ;;
+        *)
+            echo "invalid option"
+            continue
+            ;;
+    esac
+
+    echo " "
+    echo "checking for [ $greppy ] in last [ $taily ] lines"
+    greppy_taily "$taily" "$greppy"
+done

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+stamp="$HOME/Pictures/screenshots/$(date '+%y%m%d_%I%M%S_screenshot').png"
+
+case "$1" in
+    full)
+        maim -u "$stamp"
+        setsid -f                       \
+            herbe                       \
+                "screenshot taken."     \
+                "saved as:"             \
+                $(basename "$stamp")    \
+                "in:"                   \
+                "~/Pictures/screenshots"
+        ;;
+    select)
+        maim -s -o -b 3 -c 0.3,0.45,0.4 "$stamp"
+        setsid -f                       \
+            herbe                       \
+                "screenshot taken."     \
+                "saved as:"             \
+                $(basename "$stamp")    \
+                "in:"                   \
+                "~/Pictures/screenshots"
+        ;;
+    *)
+        echo "usage: $(basename $0) [ full | select ]"
+        exit 1
+        ;;
+esac

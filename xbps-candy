@@ -1,0 +1,138 @@
+#!/bin/bash
+
+# make submenu for different xbps-src commands, like extract and patch and clean
+# options for patching and repolocking
+# option for force install
+
+# gum filter returns 'nothing selected' if escaped, so [[ -n $searched ]] doesn't work
+# maybe try if $searched == 'nothing selected'; then style 'no package selected'; exit 0
+
+set -euo pipefail
+trap 'gum style                     \
+        --foreground=13             \
+        --border="normal"           \
+        --border-foreground=9       \
+        --margin="1 1"              \
+        --padding="1 1"             \
+        --italic                    \
+        "something failed."         \
+        "try checking for required" \
+        "files, internet, or git"   \
+        "config for mistakes."' ERR
+
+SRC_TREE="$XDG_DATA_HOME/void-packages"
+cd "$SRC_TREE"
+
+welcome(){
+    gum choose                      \
+        --header="choose action: "  \
+        --cursor="- "               \
+        --header.foreground=10      \
+        --cursor.foreground=9       \
+        --item.foreground=13        \
+        "search" "build" "create" "exit"
+}
+
+confirm(){
+    gum confirm                     \
+        --prompt.foreground=7       \
+        --affirmative=yes           \
+        --negative=no               \
+        --unselected.background=7   \
+        --unselected.foreground=8   \
+        --selected.background=9     \
+        --selected.foreground=15    \
+        "${1} ${2}?"
+}
+
+input(){
+    gum input                       \
+        --placeholder="$1"          \
+        --placeholder.foreground=7  \
+        --prompt.foreground=15      \
+        --cursor.foreground=14
+}
+
+spin(){
+    local title="$1"
+    shift
+    gum spin                        \
+        --spinner="jump"            \
+        --spinner.foreground=10     \
+        --title.foreground=15       \
+        --title="$title"            \
+        -- "$@"
+}
+
+style(){
+    gum style                       \
+        --foreground=15             \
+        --border="normal"           \
+        --border-foreground=9       \
+        --margin="1 1"              \
+        --padding="1 1"             \
+        --italic                    \
+        "$@"
+}
+
+update(){
+    git checkout master 1>/dev/null
+    spin "updating local repo, please wait..." git pull upstream master
+}
+
+custom(){
+    if git show-ref --quiet refs/head/"${1}-template"; then
+        style "branch '${1}-template' already exists." "checking out..."
+        git checkout "${1}-template"
+    else
+        git checkout -b "${1}-template"
+    fi
+    xnew "$1"
+    confirm "edit template for" "$1" && nvim srcpkgs/${1}/template
+    confirm "generate checksum for" "$1" && xgensum -i "$1"
+    confirm "install" "$1" && install "$1"
+}
+
+install(){
+    ./xbps-src pkg "$1"
+    confirm "install" "$1" && doas xi "$1"
+}
+
+while true; do
+    menu=$(welcome)
+    case "$menu" in
+        "search")
+            searched=$(ls srcpkgs | gum filter --placeholder="search in void source tree...")
+            if [[ -n "$searched" ]]; then
+                confirm "build" "$searched" && install "$searched"
+            else
+                style "no package entered."
+            fi
+            ;;
+        "build")
+            update
+            inputted=$(input "enter package name...")
+            if [[ -n "$inputted" ]]; then
+                install "$inputted"
+            else
+                style "no package entered."
+            fi
+            ;;
+        "create")
+            custompkg=$(input "enter custom pkg name...")
+            if [[ -n "$custompkg" ]]; then
+                custom "$custompkg"
+            else
+                style "no package entered."
+            fi
+            ;;
+        "exit")
+            spin "exiting..." sleep 1
+            break
+            ;;
+        *)
+            style "something went wrong..." "try again."
+            exit 1
+            ;;
+    esac
+done

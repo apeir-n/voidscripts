@@ -1,0 +1,10 @@
+#!/bin/sh
+
+chosen=$(printf "%s\n" "logout" "reboot" "shutdown" | dmenu -bw 3)
+
+case "$chosen" in
+    "logout") killall dwm ;;
+    "reboot") doas reboot ;;
+    "shutdown") doas shutdown -P now ;;
+    *) exit 1 ;;
+esac

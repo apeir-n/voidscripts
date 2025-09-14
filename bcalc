@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# make it so the text input will be added to the last calculator output
+# like typing "+ 4" or "* 13" will be concatenated with the result of the
+# last calculation. 
+# | bcalc:  | + 4   | <- `52` and `+ 4` will be concatenated to `52 + 4`
+# |         | 52    |
+# |         | 46    |
+
+input=""
+
+while true; do
+    if [ -n "$input" ]; then
+        result=$(echo "$input" | bc -l 2>/dev/null)
+        [ -z "$result" ] && result="(error)"
+        choices="$result\n$input"
+    else
+        choices=""
+    fi
+    
+    input=$(echo -e "$choices" | dmenu -p "calc:" -l 5)
+
+    [ -z "$input" ] && break
+done

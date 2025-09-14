@@ -1,0 +1,10 @@
+#!/bin/bash
+
+dir="$HOME/Pictures/wallpapers"
+subdir=$(ls "$dir" | dmenu -bw 3 -p "category:")
+[ -z "$subdir" ] && exit 0
+
+file=$(nsxiv -to "$dir"/"$subdir" 2>/dev/null)
+[ -z "$file" ] && exit 0
+
+"$HOME/scripts/paperplane" "$file"

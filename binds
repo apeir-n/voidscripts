@@ -1,0 +1,24 @@
+#!/bin/sh
+
+SUCK_DIR="$HOME/.local/src/suckless"
+
+seddy() {
+    sed -n '/keys\[\][[:space:]]*=[[:space:]]*{/,/^};/p' "$SUCK_DIR"/"$1"/config.def.h  \
+        | grep '^[[:space:]]*{'                                                         \
+        | sed 's/[{}]//g; s/^[[:space:]]*//; s/\<XK_//g'                                \
+        | tr -d ','
+}
+
+case "$2" in
+    "")
+        seddy "$1" | dmenu -l 20 -bw 3
+        ;;
+    "print")
+        seddy "$1"
+        ;;
+    *)
+        echo "usage: binds [program] ... optional: [print]"
+        echo "takes the keybinds array from config.def.h files in presumably any suckless project repo"
+        echo "and displays them to either dmenu or stdout if print is specified as second argument"
+        ;;
+esac
