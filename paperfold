@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dir="$HOME/Pictures/wallpapers"
-subdir=$(ls "$dir" | dmenu -bw 3 -p "category:")
+subdir=$(ls "$dir" | dmenu -bw 3 -fn "${1:-JetBrainsMono Nerd Font:size=10}" -p "category:")
 [ -z "$subdir" ] && exit 0
 
 file=$(nsxiv -to "$dir"/"$subdir" 2>/dev/null)

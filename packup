@@ -23,5 +23,5 @@ cargo install-update -a
 style 11 10 "updating go packages with gup:"
 gup update
 
-style 14 9 "languages packages updated."
+style 14 9 "language packages updated."
 setsid -f herbe "language packages updated.  "

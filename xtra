@@ -4,6 +4,7 @@ killall -q xclock
 killall -q xeyes
 killall -q oclock
 
+#                          ctwm
 xclock                          \
     -digital                    \
     -strftime "   %I:%M%p"      \
@@ -14,3 +15,15 @@ xeyes                           \
     -geometry 150-0-0 &
 oclock                          \
     -geometry -0-110 &
+
+##                           fvwm
+#xclock                          \
+#    -digital                    \
+#    -strftime "   %I:%M%p"      \
+#    -face "Terminus:size=10"    \
+#    -geometry 120x30-0+80 &
+#xeyes                           \
+#    -biblicallyAccurate         \
+#    -geometry 150-0-0 &
+#oclock                          \
+#    -geometry -0-110 &

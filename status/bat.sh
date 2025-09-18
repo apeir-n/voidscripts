@@ -51,4 +51,4 @@ case $BUTTON in
     3) setsid -f st -e battop ;;
 esac
 
-echo "$icon $charge%"
+echo "$icon  $charge%"
