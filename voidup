@@ -1,30 +1,38 @@
 #!/bin/bash
 
-# add menu asking if i wanna update lang build systems too
+style(){
+    local text="$1"
+    local brdr="$2"
+    shift 2
+    gum style                           \
+        --foreground="$text"            \
+        --border="rounded"              \
+        --border-foreground="$brdr"     \
+        "$@"
+}
 
 VOIDATA="$HOME/Documents/void"
 
-echo "  time for an update."
+style 10 11 "  time for an update."
 
-echo "backing up package list..."
+style 13 12 "backing up package list..."
 xpkg -m > $VOIDATA/pkglist.txt
 
-echo "running full system upgrade..."
+style 12 11 "running full system upgrade..."
 doas xbps-install -Su
 
-echo "cleaning orphaned packages..."
+style 11 10 "cleaning orphaned packages..."
 doas xbps-remove -o
 
-echo "updating source tree..."
+style 10 9 "updating source tree..."
 cd $HOME/.local/share/void-packages
 git checkout master
 git pull upstream master
 
-echo "logging updated kernel version..."
+style 12 13 "logging updated kernel version..."
 echo "$(date '+%y%m%d_%I:%M%P') - kernel version: $(uname -r)" >> $VOIDATA/kernelversions.txt
 
-echo "  void updated.  "
-echo "compare the last 2 kernel versions to determine if a system reboot is necessary:"
+style 11 12 "  void updated.  " "compare the last 2 kernel versions" "to determine if a system reboot" "is necessary:"
 tail -n 2 $VOIDATA/kernelversions.txt
 
 setsid -f                                                               \
@@ -34,3 +42,20 @@ setsid -f                                                               \
         "$(tail -n 2 $VOIDATA/kernelversions.txt | awk '{print $5}')"   \
         " "                                                             \
         " reboot if kernel was updated."
+
+while true; do
+    read -p "update language build system packages? [y/n] " choice
+    case "${choice,,}" in
+        y | yes)
+            packup
+            break
+            ;;
+        n | no)
+            style 10 11 "skipped lang packages update."
+            break
+            ;;
+        *)
+            echo "invalid response."
+            ;;
+    esac
+done

@@ -1,13 +1,27 @@
 #!/bin/sh
 
-echo "beginning language package updater."
+style(){
+    local text="$1"
+    local brdr="$2"
+    shift 2
+    gum style                           \
+        --foreground="$text"            \
+        --border="rounded"              \
+        --border-foreground="$brdr"     \
+        "$@"
+}
+
+style 14 9 "beginning language package updater."
 sleep 1
 
-echo "updating python packages with pipx..."
+style 13 12 "updating python packages with pipx:"
 pipx upgrade-all
 
-echo "updating rust packages with cargo..."
+style 12 11 "updating rust packages with cargo:"
 cargo install-update -a
 
-echo "updating go packages with gup..."
+style 11 10 "updating go packages with gup:"
 gup update
+
+style 14 9 "languages packages updated."
+setsid -f herbe "language packages updated.  "

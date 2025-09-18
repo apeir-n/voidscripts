@@ -1,0 +1,3 @@
+#!/bin/sh
+
+xpkg -m | dmenu -bw 3 -l 25
