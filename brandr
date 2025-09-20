@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# changing brightness with xrandr is pure software rendering and
+# doesn't interface with your hardware's normal brightness controls.
+# i made this because my thinkpad's screen is dark and dull looking,
+# and increasing this brightness helps, but it causes some apps to
+# get washed out and makes some ui elements difficult to see.
+# so being able to dial it in with a menu is nice
+
+output="eDP-1"
+brightness=1.0
+step=0.1
+termsettings=$(stty -g)
+
+stty -echo -icanon time 0 min 1
+trap 'stty "$termsettings"; echo; exit' INT TERM
+
+echo "usage:"
+echo "          [+] increment"
+echo "          [-] decrement"
+echo "          [0] reset"
+echo "          [*] quit"
+echo
+
+while true; do
+    printf "\r\e[3;93mcurrent brightness: \e[0;95m%.1f\e[0m" "$brightness"
+    read -r -n 1 key
+    case "$key" in
+        "=" | "+")
+            brightness=$(awk "BEGIN { print $brightness + $step }")
+            xrandr --output "$output" --brightness "$brightness"
+            ;;
+        "-" | "_")
+            brightness=$(awk "BEGIN { print $brightness - $step }")
+            xrandr --output "$output" --brightness "$brightness"
+            ;;
+        "0" | ")")
+            brightness=1.0
+            xrandr --output "$output" --brightness "$brightness"
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+stty "$termsettings"
+echo

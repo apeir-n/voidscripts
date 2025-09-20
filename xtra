@@ -4,26 +4,26 @@ killall -q xclock
 killall -q xeyes
 killall -q oclock
 
-#                          ctwm
-xclock                          \
-    -digital                    \
-    -strftime "   %I:%M%p"      \
-    -face "Terminus:size=10"    \
-    -geometry 120x30-0+0 &
-xeyes                           \
-    -biblicallyAccurate         \
-    -geometry 150-0-0 &
-oclock                          \
-    -geometry -0-110 &
-
-##                           fvwm
+##                           ctwm
 #xclock                          \
 #    -digital                    \
 #    -strftime "   %I:%M%p"      \
 #    -face "Terminus:size=10"    \
-#    -geometry 120x30-0+80 &
+#    -geometry 120x30-0+0 &
 #xeyes                           \
 #    -biblicallyAccurate         \
 #    -geometry 150-0-0 &
 #oclock                          \
 #    -geometry -0-110 &
+
+#                           fvwm
+xclock                          \
+    -digital                    \
+    -strftime "%I:%M  %p"       \
+    -face "Terminus:size=10"    \
+    -geometry 86x30-2+90 &
+xeyes                           \
+    -biblicallyAccurate         \
+    -geometry 150-0-0 &
+oclock                          \
+    -geometry 90x90-8+140 &
