@@ -48,7 +48,7 @@ fi
 
 case $BUTTON in
     1) notify 420 "$(acpi)" ;;
-    3) setsid -f st -e battop ;;
+    #3) setsid -f st -e battop ;;
 esac
 
 echo "$icon  $charge%"

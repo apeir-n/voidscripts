@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# this script is run by a signal in dwmblocks, triggered by `pkill -RTMIN+5 dwmblocks`
-# that signal is executed on the volume ctrl keybinds defined in ~/.xbindkeysrc,
-# and from an event returned by `mpc idle player` in the script ~/scripts/mpc_watch
 #   
 
 title=$(mpc -f %title% current)

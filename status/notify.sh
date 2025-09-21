@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-function notify(){
+notify() {
     local width="$1"
     local message="$2"
 
