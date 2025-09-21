@@ -24,6 +24,7 @@ hand=$(date '+%I')
 
 case $hand in
     00) clock="(|)" ;; 
+    01) clock="(/)" ;; 
     02) clock="(/)" ;;
     03) clock="(-)" ;;
     04) clock="(\)" ;;
