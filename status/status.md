@@ -3,14 +3,19 @@
 - this directory is mostly for scripts for my dwm status bar
 - the scripts are run by signals managed by dwmblocks
 
-### dwmblocks
+### general
 
 the delimiter in dwmblocks is configured to be ` ][ `, so i manually add the open and closing brackets to the first and last modules in the bar
 - specifically:
     - `[` for void.sh
     - for time.sh `]`
     - becomes:
-    - `[ void ][ ...etc... ][ 05:43pm ]`
+    - `[ void ][ ...etc... ][ 03:26pm ]`
+
+an example of the whole bar would look like:
+- `[ void ][   85° ][   76% ][   10% ][ 󰁿  65% ][   250921 ][ 󱑁  03:26pm ]`
+
+### scripts
 
 notify.sh
 - herbe is what i use for notifications, and it doesn't support changing settings via cli arguments
@@ -84,21 +89,32 @@ time.sh
 void.sh
 - i just put the name of the os/environment i'm running dwm on in this block
 - i also use dwm on freebsd and openbsd
+- left click currently opens `wtfutil` for a system dashboard
+- right click is a dmenu script with options to:
+    - logout
+    - reboot
+    - poweroff
 
 weather.sh
 - previously entirely used wttr.in for the temperature/icon, left mouse click, and right mouse click
-    - status | `curl -s 'https://wttr.in/?format=1'` | single line output, parsed and slightly reformatted for icon and temp
-    - left click | `curl -s 'https://wttr.in/?0&T'` | small ascii art/conditions sent to herbe for notification
-    - right click | `curl -s https://wttr.in` | full 3 day report, spawned in a terminal and hung with `read -n 1`
+    - status: `curl -s 'https://wttr.in/?format=1'`
+        - single line output, parsed and slightly reformatted for icon and temp
+    - left click: `curl -s 'https://wttr.in/?0&T'`
+        - small ascii art/conditions sent to herbe for notification
+    - right click: `curl -s https://wttr.in`
+        - full 3 day report, spawned in a terminal and hung with `read -n 1`
 - i love wttr.in, but it's really bad for scripting
     - the server seems to go down a lot
     - really slow
     - sometimes just fails and glitches
 - switched to a better (but not perfect) stack
 - all are local binaries that happen to be written in go
-    - status | `yr now --json` | pretty versatile weather cli, optional json output parsed with `jq`
-    - left click | `stormy --compact` | small ascii weather report, sent to herbe as notification
-    - right click | `wego` | output almost identical to wttr.in, again spawned in terminal and hung with `read`
+    - status: `yr now --json`
+        - pretty versatile weather cli, optional json output parsed with `jq`
+    - left click: `stormy --compact`
+        - small ascii weather report, sent to herbe as notification
+    - right click: `wego`
+        - output almost identical to wttr.in, again spawned in terminal and hung with `read`
 - much faster and more reliable
 - unfortunately `yr`'s json output for icons (`"codeSymbol"`) has an insane amount of options
 - i put them all in an array in `wearray.sh` with lots of repetition and test against it for the icon
@@ -109,4 +125,5 @@ a4.sh
 - i didn't use regular icons so that it could be used in a non-graphical console or in a terminal not using a nerd font
 - the symbols i chose work in terminus font, at least
 - my a4 config is configured to look like dvtm, which is meant to look like dwm
-- `[ tty ][ battery ][ date ][ time ]`
+- eg:
+    - `[ tty ][ |▒| 66% ][ |.:| 250921 ][ (-) 03:26pm ]`
