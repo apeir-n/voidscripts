@@ -2,7 +2,8 @@
 
 cd "$HOME/Documents/obsidian_vault"
 git add .
-git commit -m "[ vaultbackup ][ $(date '+%a_%y%m%d_%I:%M%P') ][ ch_rism_ ]"
+#git commit -m "[ vaultbackup ][ $(date '+%a_%y%m%d_%I:%M%P') ][ ch_rism_ ]"
+git commit -m "$(gessage vaultbackup)"
 git pull --rebase
 git push
 
