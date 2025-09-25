@@ -15,7 +15,8 @@ termsettings=$(stty -g)
 stty -echo -icanon time 0 min 1
 trap 'stty "$termsettings"; echo; exit' INT TERM
 
-echo "usage:"
+echo
+echo -e "  \e[96musage:"
 echo "          [+] increment"
 echo "          [-] decrement"
 echo "          [0] reset"

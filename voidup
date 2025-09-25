@@ -13,7 +13,7 @@ style(){
 
 VOIDATA="$HOME/Documents/void"
 
-style 10 11 "  time for an update."
+style 10 11 "  updating void linux  "
 
 style 13 12 "backing up package list..."
 xpkg -m > $VOIDATA/pkglist.txt
@@ -32,7 +32,10 @@ git pull upstream master
 style 12 13 "logging updated kernel version..."
 echo "$(date '+%y%m%d_%I:%M%P') - kernel version: $(uname -r)" >> $VOIDATA/kernelversions.txt
 
-style 11 12 "  void updated.  " "compare the last 2 kernel versions" "to determine if a system reboot" "is necessary:"
+style 11 12                                     \
+    "  void updated.  "                       \
+    "compare the last two kernel versions to"   \
+    "determine if a system reboot is necessary:"
 tail -n 2 $VOIDATA/kernelversions.txt
 
 setsid -f                                                               \

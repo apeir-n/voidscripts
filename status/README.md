@@ -3,6 +3,8 @@
 - this directory is mostly for scripts for my dwm status bar
 - the scripts are run by signals managed by dwmblocks
 
+---
+
 ### general
 
 the delimiter in dwmblocks is configured to be ` ][ `, so i manually add the open and closing brackets to the first and last modules in the bar
@@ -14,6 +16,8 @@ the delimiter in dwmblocks is configured to be ` ][ `, so i manually add the ope
 
 an example of the whole bar would look like:
 - `[ void ][   85° ][   76% ][   10% ][ 󰁿  65% ][   250921 ][ 󱑁  03:26pm ]`
+
+---
 
 ### scripts
 

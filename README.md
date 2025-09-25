@@ -15,6 +15,8 @@ etc/
 status/
 - stuff for my dwm status bar, see the readme in there
 
+---
+
 ### scripts
 
 bcalc
@@ -113,8 +115,8 @@ paperfold
 ```
 - i have a whole system
 - anyways, the subdirs are `ls`'ed and piped into dmenu to be selected
-- then the images in the subdirs are opened in nsxiv in thumbnail mode
-- if an image is selected from nsxiv, it gets passed to the next script...
+- then the images in the subdirs are opened in `nsxiv` in thumbnail mode
+- if an image is selected from `nsxiv`, it gets passed to the next script...
 
 paperplane
 - the same logic as `paper`, but it accepts the image as the first argument instead of choosing a random one
@@ -144,5 +146,5 @@ symenu
   ║ boxes╰─────╯ ║
   ╚══════════════╝
 ```
-- it just uses dmenu to pick the file and pass it to `xclip`
+- it just uses dmenu to pick the file, cat the contents, select the symbols, and pass them to `xclip`
 

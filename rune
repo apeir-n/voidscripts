@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+runal "$HOME/.local/share/runal/${(j:/:)@}"

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+printf "[ ${*} ][ $(date '+%a_%y%m%d ][ %I:%M%P') ][ ch_rism_ ]"

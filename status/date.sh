@@ -7,4 +7,4 @@ case $BUTTON in
     3) setsid -f st -e calcurse ;;
 esac
 
-date '+  %y%m%d'
+date '+  %a_%y%m%d'
