@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# change the uname thing
+
 style(){
     local text="$1"
     local brdr="$2"
