@@ -141,8 +141,8 @@ prompto/i/a
     - the first being a simple one defined in zshrc as `#PROMPT="${newline}%K{1}%F{15} %D{%I:%M} %K{3} %n %K{4} %m %K{5} %~ %f%k ❯ "`
     - then in order of prompt -a, -i, -o
     - then a pic of oh my posh on my mac
-    - ![promptoia](/etc/assets/promptoia.png)
-    - ![ompmac](/etc/assets/ompmac.png)
+![promptoia](/etc/assets/promptoia.png)
+![prompus](/etc/assets/prompus.png)
 
 recent
 - unfinished sketch
