@@ -2,28 +2,33 @@
 
 ### general notes
 
-- most of these are scripts i wrote
-- some of them are unfinished or sketches
-- the scripts i didn't write will be notated here
-- i usually have to edit scripts that other people write anyway to work on my system
+these are scripts that i use on my system running void linux. most of these were written by me, but those that weren't will be notated and probably given a link to the author's original script. but i usually have to or choose to edit other people's scripts to run best on my system anyway.
 
-etc/
-- what it sounds like
+this readme is just notes on each script. it's laid out as the name of the script and then a bulleted list of information beneath it. i prefer to name my scripts without extensions so they're more natural to call from the command line. i symlink the ones i use frequently into my `$PATH` like `ln -s ~/scripts/hii ~/.local/bin`
+
+---
+
+info on the 2 subdirectories in this repo:
+
+`/etc/`
+- basically just what it sounds like
 - stuff that i don't want to delete yet or other random shit
 - there's an updater script for arch in there that i was pretty proud of when i was running arch, feel free to steal
+- also an `/etc/assets` subdir for images
 
-status/
-- stuff for my dwm status bar, see the readme in there
+`/status/`
+- stuff mostly for my dwm status bar
+- they're all explained in their own readme file
 
 ---
 
 ### scripts
 
-bcalc
+`bcalc`
 - a sketch for a dmenu calculator
 - it probably won't get fleshed out
 
-binds
+`binds`
 - a pretty rockin keybindings script if i say so myself
 - it parses the general keyboard input array in the config header files of suckless project folders
 - it works because i keep all my suckless projects in a dedicated directory
@@ -36,12 +41,12 @@ binds
 - all of that stuff can be easily changed though of course, it's a short script
 - it formats the text from the array by removing commas, quotes, braces, the `XK_` keysym prefix, etc
 
-booksurf
+`booksurf`
 - this is just from the bookmarks patch for the surf browser
 - it's supposed to be implemented as a macro called from within the binary, which spawns a shell process with the commands
 - i just extracted part of it and put it into a real external script so i could use an herbe notification wit it
 
-brandr
+`brandr`
 - this is a little cli brightness menu that changes the brightness with xrandr
 - changing the brightness with xrandr is pure software rendering
     - doesn't interface with your hardware's normal brightness controls
@@ -56,21 +61,25 @@ brandr
     - also loads the original settings back in case of interrupt or termination
 - also a pretty rockin script that i'm proud of...
 
-climp
+`climp`
 - this script was originally written by [bread on penguins](https://github.com/BreadOnPenguins/scripts/blob/master/dmenu_cliphist)
 - i tweaked it so i can try to run it on my setup
 - unfinished
 
-ddo
+`ddo`
 - this is the todo script from the [dmenu repo](https://tools.suckless.org/dmenu/scripts/todo)
 - i tweaked it to keep the file at `~/.cache/scripts/todo`
 - i think i made a couple more changes too
 
-greppy
+`gessage`
+- **g**it m**essage**
+- just prints a cute message with date and time and user with no newline
+
+`greppy`
 - just a sketch for viewing system logs from `svlog`
 - unfinished
 
-maim_slop
+`maim_slop`
 - screenshot script using `maim` and `slop`
     - doesn't actually use `slop` directly because it's integrated as a flag in `maim` of course
     - but when i was on wayland it was called grim_slurp cuz you actually do have to manually call `slurp` for that
@@ -78,16 +87,20 @@ maim_slop
 - fullscreen vs selection is specified in the first argument as `maim_slop full` or `maim_slop select`
 - sends herbe notification on completion
 
-mpc_watch
+`mpc_watch`
 - a loop for updating the status bar module `./status/play.sh`
 - detailed info in `./status/README.md`
 
-packup
+`obsidian_sync`
+- syncs my obsidian vault's private git repo
+- stages, commits, pushes, and pulls
+
+`packup`
 - updates and rebuilds binaries in lang build systems/package managers
 - recently experimenting with `gum style`
 - optionally called from `./voidup`
 
-paper
+`paper`
 - finds random wallpaper from `~/Pictures/wallpapers`
 - uses pywal16 to set the wallpaper
     - the `wal` call is run from `timeout 6s` because pywal doesn't like some wallpapers for some reason
@@ -100,7 +113,7 @@ paper
         - then the file gets logged as successful in `~/.cache/scripts`
     - if it doesn't succeed, the file gets logged so i can keep track of which files fuck pywal up
 
-paperfold
+`paperfold`
 - this makes a wallpaper menu if i want a specific wallpaper
 - i have my wallpapers organized into subcategories:
 ```
@@ -118,37 +131,43 @@ paperfold
 - then the images in the subdirs are opened in `nsxiv` in thumbnail mode
 - if an image is selected from `nsxiv`, it gets passed to the next script...
 
-paperplane
+`paperplane`
 - the same logic as `paper`, but it accepts the image as the first argument instead of choosing a random one
 - i split this script out from `paperfold` so it was easier to pass files into it outside of the `paperfold` menu interface
     - for instance, passing the image file name from my file manager via a keybind to set the wallpaper instead
 
-pkglist
+`pkglist`
 - self explanatory
 - uses `xpkg` from the `xtools` meta package for `xbps`
 
-power
+`power`
 - simple logout/reboot/shutdown menu
 
-prompto/i/a
+`prompto/i/a`
 - started as an attempt to rebuild my oh-my-posh prompt on my mac in pure zsh
 - prompto is the one that gets pretty close
     - of course, omp lets you use a transient prompt instead of printing the whole thing every command
     - cant do that in native zsh prompt
     - also has more dynamically updatable modules like ram and exec time and stuff
-    - but this has the aesthetic there at least
+    - but this has the aesthetic at least
 - below is a picture of them
     - the first being a simple one defined in zshrc as `#PROMPT="${newline}%K{1}%F{15} %D{%I:%M} %K{3} %n %K{4} %m %K{5} %~ %f%k ❯ "`
     - then in order of prompt -a, -i, -o
     - then a pic of oh my posh on my mac
     - ![promptoia](/etc/assets/promptoia.png)
     - ![prompus](/etc/assets/prompus.png)
+    - `zz` is `nvim ~/.zshrc` and `rz` is `source ~/.zshrc` btw
 
-recent
+`recent`
 - unfinished sketch
 - meant to view recent files in dmenu but it's fucked up
 
-symenu
+`rune`
+- nothing currently, really
+- but i was thinking of making a simpler way to call `runal` and a js file
+- [runal](https://empr.cl/runal/) is a really sick ascii graphics program for livecoding, btw
+
+`symenu`
 - menu for grabbing symbols from a file
 - i have a couple files in `~/Documents/menus` that have various useful symbols that i'd otherwise have to hunt for online or something
 - in particular, symbols for:
@@ -162,3 +181,18 @@ symenu
 ```
 - it just uses dmenu to pick the file, cat the contents, select the symbols, and pass them to `xclip`
 
+`voidup`
+- my void updater script
+- i recently refactored a little bit to use `gum` by charmbracelet for some stuff
+- some things need to be fixed, but it just makes updating simpler
+- also optionally calls `packup` for updating lang packages at the end
+
+`xbps-slay`
+- a stupid `xbps-src` wrapper script lol
+- needs a lot of work still
+- but the idea is to make building with `xbps-src` simpler
+- it was my first script attempting to use `gum` so it's heavily integrated
+
+`xtra`
+- extra x11 stuff to call when i'm in a classic x wm like ctwm or fvwm
+- i've been calling this manually instead of from `~/.xinitrc` because it was being glitchy with that for some reason
