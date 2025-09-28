@@ -4,7 +4,7 @@
 
 these are scripts that i use on my system running void linux. most of these were written by me, but those that weren't will be notated and probably given a link to the author's original script. but i usually have to or choose to edit other people's scripts to run best on my system anyway.
 
-this readme is just notes on each script. it's laid out as the name of the script and then a bulleted list of information beneath it. i prefer to name my scripts without extensions so they're more natural to call from the command line. i symlink the ones i use frequently into my `$PATH` like `ln -s ~/scripts/hii ~/.local/bin`
+this readme is just notes on each script. it's laid out as the name of the script and then a bulleted list of information beneath it. i don't really like having excessive code comments, especially in the scripts i interact with and edit frequently, so i decided to put explanations and relevant info in this readme instead. i prefer to name my scripts without extensions so they're more natural to call from the command line. i symlink the ones i use frequently into my `$PATH` like `ln -s ~/scripts/hii ~/.local/bin`
 
 ---
 
