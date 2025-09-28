@@ -130,6 +130,20 @@ pkglist
 power
 - simple logout/reboot/shutdown menu
 
+prompto/i/a
+- started as an attempt to rebuild my oh-my-posh prompt on my mac in pure zsh
+- prompto is the one that gets pretty close
+    - of course, omp lets you use a transient prompt instead of printing the whole thing every command
+    - cant do that in native zsh prompt
+    - also has more dynamically updatable modules like ram and exec time and stuff
+    - but this has the aesthetic there at least
+- below is a picture of them
+    - the first being a simple one defined in zshrc as `#PROMPT="${newline}%K{1}%F{15} %D{%I:%M} %K{3} %n %K{4} %m %K{5} %~ %f%k ❯ "`
+    - then in order of prompt -a, -i, -o
+    - then a pic of oh my posh on my mac
+    - [promptoia](/etc/assets/promptoia.png)
+    - [ompmac](/etc/assets/ompmac.png)
+
 recent
 - unfinished sketch
 - meant to view recent files in dmenu but it's fucked up

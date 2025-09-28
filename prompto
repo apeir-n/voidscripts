@@ -1,0 +1,19 @@
+#!/bin/zsh
+
+function promptoid() {
+    echo "%F{${1}}%f%K{${1}}%F{${2}}${3}%k%F{${1}}%f"
+}
+
+function promptina() {
+    #   󱡓    
+    local nl=$'\n'
+    local os=$(promptoid 9 0 " ")
+    local zsh=$(promptoid 11 0 "  zsh")
+    local me=$(promptoid 12 0 "  %n")
+    local us=$(promptoid 13 0 "  %m")
+    #local ram=$(promptoid 13 0 "  $(free | awk '/Mem/ { printf("%.0f%%\n", $3/$2 * 100) }')%")
+    local mer=$(date '+%P')
+    echo "${nl}${os} ${zsh} ${me} ${us} ${nl}%F{7}╭──   %D{%I:%M}${mer} | %~${nl}╰─%f "
+}
+
+PROMPT="$(promptina)"
