@@ -38,27 +38,51 @@ info on the 2 subdirectories in this repo:
     - `config.def.h` files
     - dmenu
         - with the border patch (only because of `-bw 3` flag)
-- all of that stuff can be easily changed though of course, it's a short script
+- an example of the dir structure would be like this:
+```
+~
+└── .local
+    └── src
+        └── suckless
+            ├── dwm
+            │   ├── config.def.h      <- this is the only relevant file
+            │   ├── config.h          <- this one is not parsed
+            │   ├── config.mk             (i have my Makefiles configured
+            │   ├── Makefile              to remove config.h files just
+            │   ├── dwm.1                 to keep it simple, so i only ever
+            │   └── dwm.c                 use config.def.h in my builds)
+            ├── nsxiv
+            │   └── config.def.h
+            ├── st
+            │   └── config.def.h
+            ├── surf
+            │   └── config.def.h
+            ├── dmenu                 <- calling binds on dmenu will return
+            │   └── config.def.h            nothing because it doesn't have
+            └── tabbed                      a keys[] = { array }
+                └── config.def.h
+```
+- all of the requirements can be easily changed though of course, it's a short script
 - it formats the text from the array by removing commas, quotes, braces, the `XK_` keysym prefix, etc
 
 `booksurf`
 - this is just from the bookmarks patch for the surf browser
-- it's supposed to be implemented as a macro called from within the binary, which spawns a shell process with the commands
-- i just extracted part of it and put it into a real external script so i could use an herbe notification wit it
+- it's supposed to be implemented as a macro called from within the binary, defined in `config.h`, which spawns a shell process with the commands
+- i just extracted part of it and put it into a real external script so i could use an herbe notification with it
 
 `brandr`
 - this is a little cli brightness menu that changes the brightness with xrandr
 - changing the brightness with xrandr is pure software rendering
     - doesn't interface with your hardware's normal brightness controls
 - i made this because my thinkpad's screen is pretty dark and dull looking
-    - it gets washed out and makes some ui elements in gui apps difficult to see
-    - being able to dial it in with a menu instead of just running the raw commands is nice
+    - but keeping it high all the time makes it look washed out in some contexts and makes some ui elements invisible
+    - being able to dial it in and out with a menu instead of just running the raw commands is nice
 - runs in a loop where the input line is overwritten, so it's more like an interface
-- uses escape codes to color some of the text
+- uses escape codes to color the text for fun
 - awk does the floating point math to inc/dec the amount by 0.1
 - changes the term settings with `stty` temporarily for a better ui
     - loads the original ones back before exiting
-    - also loads the original settings back in case of interrupt or termination
+    - also loads the original settings back with a trap, in case of interruption or termination
 - also a pretty rockin script that i'm proud of...
 
 `climp`
@@ -73,7 +97,7 @@ info on the 2 subdirectories in this repo:
 
 `gessage`
 - **g**it m**essage**
-- just prints a cute message with date and time and user with no newline
+- just prints a cute message with date, time, and user, with no newline
 
 `greppy`
 - just a sketch for viewing system logs from `svlog`
@@ -83,13 +107,13 @@ info on the 2 subdirectories in this repo:
 - screenshot script using `maim` and `slop`
     - doesn't actually use `slop` directly because it's integrated as a flag in `maim` of course
     - but when i was on wayland it was called grim_slurp cuz you actually do have to manually call `slurp` for that
-    - so i kept the naming tradition because i love these stupid screenshot util names
+    - so i kept the naming convention because i love these stupid screenshot util names
 - fullscreen vs selection is specified in the first argument as `maim_slop full` or `maim_slop select`
 - sends herbe notification on completion
 
 `mpc_watch`
-- a loop for updating the status bar module `./status/play.sh`
-- detailed info in `./status/README.md`
+- a loop for updating the status bar module `/status/play.sh`
+- detailed info in `/status/README.md`
 
 `obsidian_sync`
 - syncs my obsidian vault's private git repo
@@ -98,7 +122,6 @@ info on the 2 subdirectories in this repo:
 `packup`
 - updates and rebuilds binaries in lang build systems/package managers
 - recently experimenting with `gum style`
-- optionally called from `./voidup`
 
 `paper`
 - finds random wallpaper from `~/Pictures/wallpapers`
@@ -128,32 +151,31 @@ info on the 2 subdirectories in this repo:
 ```
 - i have a whole system
 - anyways, the subdirs are `ls`'ed and piped into dmenu to be selected
-- then the images in the subdirs are opened in `nsxiv` in thumbnail mode
+- on subdir selection, the images inside are opened in `nsxiv` in thumbnail mode
 - if an image is selected from `nsxiv`, it gets passed to the next script...
 
 `paperplane`
 - the same logic as `paper`, but it accepts the image as the first argument instead of choosing a random one
 - i split this script out from `paperfold` so it was easier to pass files into it outside of the `paperfold` menu interface
-    - for instance, passing the image file name from my file manager via a keybind to set the wallpaper instead
+    - for instance, passing the image file name to the script from a file manager via a keybind to set the wallpaper instead
 
 `pkglist`
 - self explanatory
-- uses `xpkg` from the `xtools` meta package for `xbps`
+- uses `xpkg` from the `xtools` meta package for `xbps` and views them in dmenu
 
 `power`
 - simple logout/reboot/shutdown menu
 
 `prompto/i/a`
-- started as an attempt to rebuild my oh-my-posh prompt on my mac in pure zsh
-- prompto is the one that gets pretty close
-    - of course, omp lets you use a transient prompt instead of printing the whole thing every command
-    - cant do that in native zsh prompt
-    - also has more dynamically updatable modules like ram and exec time and stuff
+- started as an attempt to rebuild my `oh-my-posh` prompt on my mac in pure zsh
+- `prompto` is the one that gets pretty close
+    - of course, omp lets you use a transient prompt instead of printing the whole thing every command, which you can't do in the native zsh prompt
+    - omp also has more dynamically updatable modules like ram and exec time and stuff
     - but this has the aesthetic at least
 - below is a picture of them
     - the first being a simple one defined in zshrc as `#PROMPT="${newline}%K{1}%F{15} %D{%I:%M} %K{3} %n %K{4} %m %K{5} %~ %f%k ❯ "`
     - then in order of prompt -a, -i, -o
-    - then a pic of oh my posh on my mac
+    - then a pic of my `oh-my-posh` prompt on my mac
     - ![promptoia](/etc/assets/promptoia.png)
     - ![prompus](/etc/assets/prompus.png)
     - `zz` is `nvim ~/.zshrc` and `rz` is `source ~/.zshrc` btw
@@ -164,7 +186,7 @@ info on the 2 subdirectories in this repo:
 
 `rune`
 - nothing currently, really
-- but i was thinking of making a simpler way to call `runal` and a js file
+- but i was thinking of making a simpler way to call `runal` with a js file
 - [runal](https://empr.cl/runal/) is a really sick ascii graphics program for livecoding, btw
 
 `symenu`
@@ -179,7 +201,11 @@ info on the 2 subdirectories in this repo:
   ║ boxes╰─────╯ ║
   ╚══════════════╝
 ```
-- it just uses dmenu to pick the file, cat the contents, select the symbols, and pass them to `xclip`
+- it just uses dmenu to:
+    - pick the file
+    - cat the contents
+    - select the symbols
+    - and pass them to `xclip`
 
 `voidup`
 - my void updater script
@@ -191,8 +217,8 @@ info on the 2 subdirectories in this repo:
 - a stupid `xbps-src` wrapper script lol
 - needs a lot of work still
 - but the idea is to make building with `xbps-src` simpler
-- it was my first script attempting to use `gum` so it's heavily integrated
+- it was my first script attempting to use `gum` so it's heavily saturated with gum
 
 `xtra`
-- extra x11 stuff to call when i'm in a classic x wm like ctwm or fvwm
-- i've been calling this manually instead of from `~/.xinitrc` because it was being glitchy with that for some reason
+- extra x11 stuff to launch when i'm in a classic x wm like ctwm or fvwm
+- i've been calling this manually instead of from `~/.xinitrc` because it was being glitchy for some reason
