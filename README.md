@@ -172,22 +172,21 @@ info on the 2 subdirectories in this repo:
     - of course, omp lets you use a transient prompt instead of printing the whole thing every command, which you can't do in the native zsh prompt
     - omp also has more dynamically updatable modules like ram and exec time and stuff
     - but this has the aesthetic at least
-- below is a picture of them
+- i honestly don't even like using omp... i literally only use it for the transient prompt aspect
+    - if i can figure out a way to do that in pure zsh, i'll ditch it
+- anyway, below is a picture of them
     - the first being a simple one defined in zshrc as `#PROMPT="${newline}%K{1}%F{15} %D{%I:%M} %K{3} %n %K{4} %m %K{5} %~ %f%k ❯ "`
-    - then in order of prompt -a, -i, -o
+        - this was inspired by [bread on penguin's](https://github.com/BreadOnPenguins/dots/blob/master/.config/zsh/.zshrc) prompt
+    - then, listed in the order of prompt -a, -i, -o
     - then a pic of my `oh-my-posh` prompt on my mac
     - ![promptoia](/etc/assets/promptoia.png)
     - ![prompus](/etc/assets/prompus.png)
-    - `zz` is `nvim ~/.zshrc` and `rz` is `source ~/.zshrc` btw
-
-`recent`
-- unfinished sketch
-- meant to view recent files in dmenu but it's fucked up
+    - `zz` is an alias for `nvim ~/.zshrc` and `rz` is `source ~/.zshrc` if you were wondering
 
 `rune`
 - nothing currently, really
 - but i was thinking of making a simpler way to call `runal` with a js file
-- [runal](https://empr.cl/runal/) is a really sick ascii graphics program for livecoding, btw
+- [runal](https://empr.cl/runal/) is a really sick ascii graphics program for livecoding btw
 
 `symenu`
 - menu for grabbing symbols from a file

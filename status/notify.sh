@@ -11,6 +11,7 @@ notify() {
         echo "herbe.width: $width"
     ) | xrdb -load
 
+    #setsid -f herbe "$(printf \"$message\" | tr '―' '-')"
     setsid -f herbe "$message"
     sleep 1
     xrdb -load /tmp/xres.bak

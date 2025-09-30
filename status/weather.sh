@@ -12,10 +12,10 @@ icon="${icons[$symbol]}"
 if [[ -z "$icon" ]]; then
     icon=""
 fi
-
+#doesnt render in herbe: ―
 case $BUTTON in
-    1) notify 290 "$(stormy --compact)" ;;
-    3) setsid -f st -g 125x36 -e bash -c "wego | head -n -3; read -n 1 -p 'q to close:' key; [ \"key\" = q ] && exit" ;;
+    1) notify 290 "$(stormy --compact | sed 's/―/-/g')" ;;
+    3) setsid -f st -g 125x36 -e bash -c "wego | tail -n +3 | less -R" ;;
 esac
 
 echo "$icon  $temp"

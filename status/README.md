@@ -1,6 +1,6 @@
 # status modules
 
-the scripts in this directory are mostly used in my dwm status bar, but they can easily be adapted to be used in other status bars or for other stuff that takes standard input.the scripts are run on signals managed by dwmblocks (see `/builds/dwmblocks/` in my [voiddots repo](https://github.com/apeir-n/voiddots) if you're interested).
+the scripts in this directory are mostly used in my dwm status bar, but they can easily be adapted to be used in other status bars or for other stuff that takes standard input. the scripts are run on signals managed by dwmblocks (see `/builds/dwmblocks/` in my [voiddots repo](https://github.com/apeir-n/voiddots) if you're interested).
 
 ---
 
@@ -131,8 +131,10 @@ an example of the whole bar would look like:
         - pretty versatile weather cli, optional json output parsed with `jq`
     - left click: `stormy --compact`
         - small ascii weather report, sent to herbe as notification
+        - also replacing the unicode bar `―` with a regular ascii dash `-` using sed because herbe doesn't render it properly
     - right click: `wego`
-        - output almost identical to wttr.in, again spawned in terminal and hung with `read`
+        - output almost identical to wttr.in
+        - now hung with `less -R` because i just realized you can use ansi colors in less with -R...
 - much faster and more reliable
 - unfortunately `yr`'s json output for icons (`"codeSymbol"`) has an insane amount of options
 - i put them all in an array in `wearray.sh` with lots of repetition and test against it for the icon
