@@ -182,6 +182,19 @@ info on the 2 subdirectories in this repo:
     - ![promptoia](/etc/assets/promptoia.png)
     - ![prompus](/etc/assets/prompus.png)
     - `zz` is an alias for `nvim ~/.zshrc` and `rz` is `source ~/.zshrc` if you were wondering
+- implementing the prompt as a function with local variables makes it way easier to read and modify
+    - i have one function for formatting the sections, `promptoid()`, which sets up the fg and bg colors and the zsh prompt escape code
+    - then inside of `promptina()`, i lay out the little promptoids by calling `promptoid()` for each module i want in my prompt
+        - such as username `%n`, hostname `%m`, date `%D{%I:%M}`, etc
+        - all these are given as arg 3 to `promptoid()`, and the fg color given as arg 1, and bg as 2
+    - then they're just delivered from an echo statement at the end to stdout as a string, and the whole string is passed to `PROMPT=$(promptina)`
+    - `prompto` is slightly more complicated:
+        - i use a half-circle delimiter thing and wrap it in a fg color declaration like `%F${color1}%f`
+        - then for the body, i use `%K${color1}` to set the bg color to the same as the delim's fg color, and set the fg for the text
+        - then, the text is given as the zsh prompt escape code which expands to whatever you're calling, like hostname or time, etc
+        - having all of that formatting abstracted into a function makes it so much easier to work with
+    - `prompta` is similar to `prompto` but without the modules separated out using the round delimiters
+    - `prompti` is like `prompta` but with no icons
 
 `rune`
 - nothing currently, really
