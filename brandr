@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# changing brightness with xrandr is pure software rendering and
-# doesn't interface with your hardware's normal brightness controls.
-# i made this because my thinkpad's screen is dark and dull looking,
-# and increasing this brightness helps, but it causes some apps to
-# get washed out and makes some ui elements difficult to see.
-# so being able to dial it in with a menu is nice
-
 output="eDP-1"
 brightness=1.0
 step=0.1
