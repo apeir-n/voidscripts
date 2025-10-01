@@ -96,7 +96,7 @@ info on the 2 subdirectories in this repo:
 - i think i made a couple more changes too
 
 `gessage`
-- g~it~ ~m~essage
+- g~it m~essage
 - just prints a cute message with date, time, and user, with no newline
 
 `greppy`
