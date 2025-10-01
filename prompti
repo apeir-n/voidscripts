@@ -10,8 +10,8 @@ function promptina() {
     local clk=$(promptoid 9 0 "   %D{%I:%M}${mer} ")
     local zsh=$(promptoid 11 0 "   zsh ")
     local me=$(promptoid 12 0 "   %n ")
-    local us=$(promptoid 13 0 "   %m ")
-    echo "${nl}${clk}${zsh}${me}${us}${nl}%F{7}┌── %~${nl}└─%f "
+    local us=$(promptoid 10 0 "   %m ")
+    echo "${clk}${zsh}${me}${us}${nl}%F{7}┌── %~${nl}└─%f "
 }
 
 PROMPT="$(promptina)"
