@@ -1,7 +1,9 @@
 #!/bin/bash
 
+state="$XDG_CACHE_HOME/brandr"
 output="${1:-eDP-1}"
-brightness=1.0
+brightness=$(slcat "$state")
+brightness=${brightness:-1.0}
 step=0.1
 termsettings=$(stty -g)
 
@@ -37,6 +39,7 @@ while true; do
             break
             ;;
     esac
+    echo "$brightness" > "$state"
 done
 
 stty "$termsettings"
