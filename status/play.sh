@@ -33,7 +33,7 @@ function toggle() {
 case $BUTTON in
     1) setsid -f herbe "$artist" "$title" ;;
     2) toggle ;;
-    3) setsid -f st -g 96x24 -e rmpc -t ~/.config/rmpc/themes/pywalst.ron ;;
+    3) setsid -f xterm -geometry 96x24 -fa "monospace:pixelsize=14" e rmpc -t ~/.config/rmpc/themes/pywalst.ron ;;
 esac
 
 echo "$play  $vol"

@@ -95,8 +95,14 @@ info on the 2 subdirectories in this repo:
 - i tweaked it to keep the file at `~/.cache/scripts/todo`
 - i think i made a couple more changes too
 
+`dmoji`
+- originally inspired by the [dmenumoji](https://github.com/valeriangalliat/dmenumoji) script
+- but i didn't really like it so i basically completely rewrote it and made it simpler
+- it just copies the emoji to clipboard instead of using xdotool to write it
+- you can find the emoji.txt file in the repo linked above
+
 `gessage`
-- g~it m~essage
+- `[g]it m[essage]`
 - just prints a cute message with date, time, and user, with no newline
 
 `greppy`
@@ -193,8 +199,11 @@ info on the 2 subdirectories in this repo:
         - then for the body, i use `%K${color1}` to set the bg color to the same as the delim's fg color, and set the fg for the text
         - then, the text is given as the zsh prompt escape code which expands to whatever you're calling, like hostname or time, etc
         - having all of that formatting abstracted into a function makes it so much easier to work with
-    - `prompta` is similar to `prompto` but without the modules separated out using the round delimiters
-    - `prompti` is like `prompta` but with no icons
+    - `prompti` is similar to `prompto` but without the modules separated out using the round delimiters
+    - `prompta` is like `prompta` but with no icons
+
+`randy`
+- just an xrandr alt monitor shortcut
 
 `rune`
 - nothing currently, really

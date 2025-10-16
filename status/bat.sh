@@ -2,11 +2,11 @@
 
 source $HOME/scripts/status/notify.sh
 
-bat0=$(cat /sys/class/power_supply/BAT0/capacity)
-bat1=$(cat /sys/class/power_supply/BAT1/capacity)
+bat0=$(slcat /sys/class/power_supply/BAT0/capacity)
+bat1=$(slcat /sys/class/power_supply/BAT1/capacity)
 charge=$(( (bat0 + bat1) / 2 ))
-status0=$(cat /sys/class/power_supply/BAT0/status)
-status1=$(cat /sys/class/power_supply/BAT1/status)
+status0=$(slcat /sys/class/power_supply/BAT0/status)
+status1=$(slcat /sys/class/power_supply/BAT1/status)
 
 if [[ "$status0" == "Charging" || "$status1" == "Charging" ]]; then
     icon=""
@@ -33,17 +33,17 @@ else
         icon="󰁺"
     else
         icon=""
-        setsid -f herbe "warning:" "battery at $charge%" "charge now."
+        slsetsid -f herbe "warning:" "battery at $charge%" "charge now."
     fi
 fi
 
 if (( charge <= 20 )); then
     if [[ ! -f /tmp/battery_notified ]]; then
-        setsid -f herbe "warning:" "battery at $charge%"
-        touch /tmp/battery_notified
+        slsetsid -f herbe "warning:" "battery at $charge%"
+        sltouch /tmp/battery_notified
     fi
 else
-    rm -f /tmp/battery_notified
+    slrm -f /tmp/battery_notified
 fi
 
 case $BUTTON in
@@ -51,4 +51,4 @@ case $BUTTON in
     #3) setsid -f st -e battop ;;
 esac
 
-echo "$icon  $charge%"
+slecho "$icon  $charge%"

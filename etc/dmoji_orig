@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+menudir="$HOME/Documents/menus"
+active_window=$(xdotool getactivewindow)
+
+# Replace the variant selector code point that dmenu can't display
+emoji=$(cat "$menudir/emoji.txt" | sed $'s/\ufe0f//' | dmenu -i -l 30 -bw 3 | sed 's/ .*//')
+xdotool windowactivate "$active_window"
+
+if [ -z "$emoji" ]; then
+    exit
+fi
+
+# Bring the variant selector code point back
+emoji=$(grep "^$emoji" "$menudir/emoji.txt" | sed 's/ .*//')
+
+if [ "$1" = copy ]; then
+    printf "$emoji" | xclip -selection clipboard
+    setsid -f herbe "copied emoji to clipboard."
+else
+    xdotool type -delay 100 "$emoji"
+fi

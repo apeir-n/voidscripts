@@ -15,7 +15,8 @@ fi
 #doesnt render in herbe: ―
 case $BUTTON in
     1) notify 290 "$(stormy --compact | sed 's/―/-/g')" ;;
-    3) setsid -f st -g 125x36 -e bash -c "wego | tail -n +3 | less -R" ;;
+    #3) setsid -f st -g 125x36 -e bash -c "wego | tail -n +3 | less -R" ;;
+    3) setsid -f xterm -geometry 125x37 -fa "monospace:pixelsize=14" -e bash -c "wego | tail -n +3 | less -R" ;;
 esac
 
 echo "$icon  $temp"

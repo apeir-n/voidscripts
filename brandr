@@ -1,6 +1,6 @@
 #!/bin/bash
 
-output="eDP-1"
+output="${1:-eDP-1}"
 brightness=1.0
 step=0.1
 termsettings=$(stty -g)
@@ -8,6 +8,7 @@ termsettings=$(stty -g)
 stty -echo -icanon time 0 min 1
 trap 'stty "$termsettings"; echo; exit' INT TERM
 
+echo -e "  \e[94mbrandr [\e[4;92mmonitor\e[0;94m] (default: eDP-1)\e[0m"
 echo
 echo -e "  \e[96musage:"
 echo "          [+] increment"
@@ -17,7 +18,7 @@ echo "          [*] quit"
 echo
 
 while true; do
-    printf "\r\e[3;93mcurrent brightness: \e[0;95m%.1f\e[0m" "$brightness"
+    printf "\r\e[3;93m  current brightness: \e[0;95m%.1f\e[0m" "$brightness"
     read -r -n 1 key
     case "$key" in
         "=" | "+")

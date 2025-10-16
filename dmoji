@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+list="$HOME/Documents/menus/emoji.txt"
+emoji=$(cat "$list" | dmenu -i -l 30 -bw 3 | sed 's/ .*//')
+
+if [ -n "$emoji" ]; then
+    printf "$emoji" | xclip -selection clipboard
+    slsetsid -f herbe "copied emoji to clipboard."
+else
+    slsetsid -f herbe "failed to copy emoji to clipboard..."
+    exit
+fi

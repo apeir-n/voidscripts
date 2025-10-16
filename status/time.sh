@@ -22,8 +22,8 @@ esac
 
 case $BUTTON in
     1) notify 260 "$(date)" ;;
-    3) setsid -f st -g 100x20 -e /home/ch_rism_/.local/share/cargo/bin/tuime --format "%I:%M" -f font3d -c cyan -c green ;;
-    #3) setsid -f st -e /home/ch_rism_/.cargo/bin/clock-rs -tsBc green --fmt '%y%m%d' ;;
+    #3) setsid -f st -g 100x20 -e /home/ch_rism_/.local/share/cargo/bin/tuime --format "%I:%M" -f font3d -c cyan -c green ;;
+    3) setsid -f xterm -geometry 100x20 -fa "monospace:pixelsize=14" -e /home/ch_rism_/.local/share/cargo/bin/tuime --format "%I:%M" -f font3d -c cyan -c green ;;
 esac
 
 date "+$icon  %I:%M%P ] "

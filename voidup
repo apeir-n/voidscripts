@@ -31,22 +31,24 @@ cd $HOME/.local/share/void-packages
 git checkout master
 git pull upstream master
 
-style 12 13 "logging updated kernel version..."
-echo "$(date '+%y%m%d_%I:%M%P') - kernel version: $(uname -r)" >> $VOIDATA/kernelversions.txt
+#style 12 13 "logging updated kernel version..."
+#echo "$(date '+%y%m%d_%I:%M%P') - kernel version: $(uname -r)" >> $VOIDATA/kernelversions.txt
+#
+#style 11 12                                     \
+#    "  void updated.  "                       \
+#    "compare the last two kernel versions to"   \
+#    "determine if a system reboot is necessary:"
+#tail -n 2 $VOIDATA/kernelversions.txt
+#
+#setsid -f                                                               \
+#    herbe                                                               \
+#        "  void updated.  "                                           \
+#        " "                                                             \
+#        "$(tail -n 2 $VOIDATA/kernelversions.txt | awk '{print $5}')"   \
+#        " "                                                             \
+#        " reboot if kernel was updated."
 
-style 11 12                                     \
-    "  void updated.  "                       \
-    "compare the last two kernel versions to"   \
-    "determine if a system reboot is necessary:"
-tail -n 2 $VOIDATA/kernelversions.txt
-
-setsid -f                                                               \
-    herbe                                                               \
-        "  void updated.  "                                           \
-        " "                                                             \
-        "$(tail -n 2 $VOIDATA/kernelversions.txt | awk '{print $5}')"   \
-        " "                                                             \
-        " reboot if kernel was updated."
+setsid -f herbe "  void updated.  "
 
 echo
 
