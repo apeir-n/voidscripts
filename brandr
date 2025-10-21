@@ -1,6 +1,10 @@
 #!/bin/bash
 
-state="$XDG_CACHE_HOME/brandr"
+statedir="$XDG_CACHE_HOME/scripts"
+state="$statedir/brandr"
+[ -d "$statedir" ] || mkdir -p "$statedir"
+[ -e "$state" ] || touch "$state"
+
 output="${1:-eDP-1}"
 brightness=$(slcat "$state")
 brightness=${brightness:-1.0}
@@ -20,7 +24,7 @@ echo "          [*] quit"
 echo
 
 while true; do
-    printf "\r\e[3;93m  current brightness: \e[0;95m%.1f\e[0m" "$brightness"
+    slprintf "\r\e[3;93m  current brightness: \e[0;95m%.1f\e[0m" "$brightness"
     read -r -n 1 key
     case "$key" in
         "=" | "+")

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 dir="$HOME/Pictures/wallpapers"
 subdir=$(ls "$dir" | dmenu -bw 3 -fn "${1:-JetBrainsMono Nerd Font:size=10}" -p "category:")

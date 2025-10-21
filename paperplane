@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 [ -z "$1" ] && setsid -f herbe "no paper sent to paperplane  " && exit 1
 name="$(basename $1)"

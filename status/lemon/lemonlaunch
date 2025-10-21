@@ -1,0 +1,7 @@
+#!/bin/sh
+
+killall -q lemonbar
+killall -q lemonconfig
+
+#$HOME/scripts/status/lemon/lemonconfig | lemonbar -p -f "terminus:size=12"
+$HOME/scripts/status/lemon/lemonconfig | lemonbar -p -f "monospace:pixelsize=14"

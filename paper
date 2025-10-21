@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 dir="$HOME/Pictures/wallpapers"
 random="$(find "$dir" -type f \( -iname "*.jpg" -o -iname "*.png" \) | shuf -n 1)"

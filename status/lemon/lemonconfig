@@ -1,0 +1,22 @@
+#!/bin/sh
+
+time="$($HOME/scripts/status/time.sh)"
+date="$($HOME/scripts/status/date.sh)"
+bat="$($HOME/scripts/status/bat.sh)"
+mem="$($HOME/scripts/status/mem.sh)"
+play="$($HOME/scripts/status/play.sh)"
+weather="$($HOME/scripts/status/weather.sh)"
+void="$($HOME/scripts/status/void.sh)"
+
+left() {
+    echo "hi"
+}
+
+right() {
+    echo "$void ][ $weather ][ $play ][ $mem ][ $bat ][ $date ][ $time"
+}
+
+while true; do
+    echo "%{l}$(left) %{r}$(right)"
+    sleep 60
+done

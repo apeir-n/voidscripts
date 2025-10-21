@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case "$1" in
+    "dwm") startx "$HOME/scripts/launch_dwm" ;;
+    "fvwm") startx "$HOME/scripts/launch_fvwm" ;;
+    "ctwm") startx "$HOME/scripts/launch_ctwm" ;;
+    "twm") startx "$HOME/scripts/launch_twm" ;;
+    *)
+        echo
+        echo "    usage:"
+        echo
+        echo "        launch [wndow manager]"
+        echo
+        echo "        launches a window manager in an x server using startx, with a unique startup script for each wm."
+        echo "        available wms are dwm, fvwm, ctwm, and twm."
+        ;;
+esac
