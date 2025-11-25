@@ -1,10 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
-source $HOME/scripts/status/notify.sh
+. $HOME/scripts/status/notify.sh
 
-case $BUTTON in
-    1) notify 600 "$(free -h)" ;;
-    #3) setsid -f st -e btop ;;
+case $BLOCK_BUTTON in
+    1) notify 700 "$(free -h)" ;;
     3) setsid -f xterm -fa "monospace:pixelsize=14" -e btop ;;
 esac
 

@@ -5,7 +5,7 @@
 title=$(mpc -f %title% current)
 artist=$(mpc -f %artist% current)
 state=$(mpc status %state%)
-vol=$(amixer get Master | awk -F'[][]' '/%/ { print $2; exit }')
+vol=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{ print $5; exit }')
 
 case $state in
     "playing")  play="" ;;
@@ -30,10 +30,11 @@ function toggle() {
     fi
 }
 
-case $BUTTON in
+case $BLOCK_BUTTON in
     1) setsid -f herbe "$artist" "$title" ;;
+    #2) toggle && pkill -RTMIN+5 dwmblocks ;;
     2) toggle ;;
-    3) setsid -f xterm -geometry 96x24 -fa "monospace:pixelsize=14" e rmpc -t ~/.config/rmpc/themes/pywalst.ron ;;
+    3) setsid -f xterm -geometry 96x24 -fa "monospace:pixelsize=14" -e rmpc ;;
 esac
 
 echo "$play  $vol"

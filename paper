@@ -7,8 +7,10 @@ name="$(basename $random)"
 setsid -f herbe "folding paper with pywal..."
 
 if timeout 6s wal --cols16 -a 40 -i "$random" >/dev/null 2>&1; then
-    xrdb -merge $HOME/.Xresources
+    xrdb -merge "$HOME/.Xresources"
     dwm-msg run_command xrdb
+    colorxpet
+    colorbaby
     setsid -f herbe "paperplane landed  " " " "$name"
     echo "$(date '+%a_%y%m%d_%I:%M%P'):   paperplane landed at '$name' international" >> "$HOME/.cache/scripts/paperplane.log"
 else

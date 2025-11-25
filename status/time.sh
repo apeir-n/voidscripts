@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-source $HOME/scripts/status/notify.sh
+. $HOME/scripts/status/notify.sh
 
 clock=$(date '+%I')
 
@@ -20,9 +20,8 @@ case $clock in
     12) icon="󱑊" ;;
 esac
 
-case $BUTTON in
+case $BLOCK_BUTTON in
     1) notify 260 "$(date)" ;;
-    #3) setsid -f st -g 100x20 -e /home/ch_rism_/.local/share/cargo/bin/tuime --format "%I:%M" -f font3d -c cyan -c green ;;
     3) setsid -f xterm -geometry 100x20 -fa "monospace:pixelsize=14" -e /home/ch_rism_/.local/share/cargo/bin/tuime --format "%I:%M" -f font3d -c cyan -c green ;;
 esac
 

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+dir="$HOME/Videos"
+stamp=$(date '+%y%m%d_%I%M%S_screengrab')
+geometry=$(slop -o -b 3 -f "%x %y %w %h") || exit 1
+
+read -r x y w h <<< "$geometry"
+
+ffmpeg                      \
+    -video_size "${w}x${h}" \
+    -framerate 30           \
+    -f x11grab              \
+    -i ":0.0+${x},${y}"     \
+    -c:v libx264            \
+    -preset ultrafast       \
+    -crf 18                 \
+    "${dir}/${stamp}.mp4"

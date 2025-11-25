@@ -1,12 +1,12 @@
 # status modules
 
-the scripts in this directory are mostly used in my dwm status bar, but they can easily be adapted to be used in other status bars or for other stuff that takes standard input. the scripts are run on signals managed by dwmblocks (see `/builds/dwmblocks/` in my [voiddots repo](https://github.com/apeir-n/voiddots) if you're interested).
+the scripts in this directory are mostly used in my dwm status bar, but they can easily be adapted to be used in other status bars or for other stuff that takes standard input. the scripts are run on signals managed by dwmblocks (see `/builds/dwmblocks-async/` in my [voiddots repo](https://github.com/apeir-n/voiddots) if you're interested).
 
 ---
 
 ### general
 
-the delimiter in dwmblocks is configured to be ` ][ `, so i manually add the open and closing brackets to the first and last modules in the bar
+the delimiter in dwmblocks-async is configured to be ` ][ `, so i manually add the open and closing brackets to the first and last modules in the bar
 - specifically:
     - `[` for void.sh
     - for time.sh `]`

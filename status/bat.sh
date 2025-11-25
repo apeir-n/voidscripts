@@ -46,7 +46,7 @@ else
     slrm -f /tmp/battery_notified
 fi
 
-case $BUTTON in
+case $BLOCK_BUTTON in
     1) notify 420 "$(acpi)" ;;
     #3) setsid -f st -e battop ;;
 esac

@@ -1,10 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
-source $HOME/scripts/status/notify.sh
+. $HOME/scripts/status/notify.sh
 
-case $BUTTON in
+case $BLOCK_BUTTON in
     1) notify 200 "$(cal)" ;;
-    #3) setsid -f st -e calcurse ;;
     3) slsetsid -f xterm -fa "monospace:pixelsize=14" -e calcurse ;;
 esac
 

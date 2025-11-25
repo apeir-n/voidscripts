@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 dir="$HOME/Documents/menus"
 [ -z "$dir" ] && exit 0

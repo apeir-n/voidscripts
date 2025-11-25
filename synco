@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cd "$HOME/Documents/obsidian_vault"
+git add .
+git commit -m "$(gessage vaultbackup)"
+
+if git pull --rebase; then
+    setsid -f herbe "  obsidian vault pulled"
+else
+    setsid -f herbe "  pull failed"
+    exit 1
+fi
+
+if git push; then
+    setsid -f herbe "  obsidian vault synced"
+else
+    setsid -f herbe "  sync failed"
+    exit 1
+fi
