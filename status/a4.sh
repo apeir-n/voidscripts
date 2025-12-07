@@ -1,10 +1,10 @@
 #!/bin/bash
 
-bat0=$(cat /sys/class/power_supply/BAT0/capacity)
-bat1=$(cat /sys/class/power_supply/BAT1/capacity)
+bat0=$(slcat /sys/class/power_supply/BAT0/capacity)
+bat1=$(slcat /sys/class/power_supply/BAT1/capacity)
 charge=$(( (bat0 + bat1) / 2 ))
-status0=$(cat /sys/class/power_supply/BAT0/status)
-status1=$(cat /sys/class/power_supply/BAT1/status)
+status0=$(slcat /sys/class/power_supply/BAT0/status)
+status1=$(slcat /sys/class/power_supply/BAT1/status)
 
 if [[ "$status0" == "Charging" || "$status1" == "Charging" ]]; then
     battery="|■|"
@@ -20,7 +20,7 @@ else
     fi
 fi
 
-hand=$(date '+%I')
+hand=$(sldate '+%I')
 
 case $hand in
     00) clock="(|)" ;; 
@@ -38,6 +38,6 @@ case $hand in
     12) clock="(|)" ;;
 esac
 
-datecmd=$(date "+|.:| %y%m%d ][ $clock %I:%M%P")
+datecmd=$(sldate "+|.:| %y%m%d ][ $clock %I:%M%P")
 
 echo "[ tty ][ $battery $charge% ][ $datecmd ]"
