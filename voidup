@@ -33,31 +33,6 @@ setsid -f herbe "  void updated.  "
 
 echo
 
-#while true; do
-#    choice=$(
-#        gum choose                                                      \
-#            --header="update lanugage build system packages?"           \
-#            --cursor="- "                                               \
-#            --header.foreground=10                                      \
-#            --cursor.foreground=9                                       \
-#            --item.foreground=13                                        \
-#            "yes" "no"
-#        )
-#    case "$choice" in
-#        yes)
-#            packup
-#            break
-#            ;;
-#        no)
-#            style 10 11 "skipped lang packages update."
-#            break
-#            ;;
-#        *)
-#            style 7 8 "invalid response."
-#            ;;
-#    esac
-#done
-
 while true; do
     choice=$(
         gum choose                                                      \

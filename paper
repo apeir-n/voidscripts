@@ -1,19 +1,29 @@
 #!/bin/sh
 
 dir="$HOME/Pictures/wallpapers"
-random="$(find "$dir" -type f \( -iname "*.jpg" -o -iname "*.png" \) | shuf -n 1)"
-name="$(basename $random)"
+stamp="$(date '+%a_%y%m%d_%I:%M%P')"
 
 setsid -f herbe "folding paper with pywal..."
 
-if timeout 6s wal --cols16 -a 40 -i "$random" >/dev/null 2>&1; then
+if timeout 6s wal --cols16 --saturate 0.2 -a 40 --recursive -i "$dir" >/dev/null 2>&1; then
+    picpath="$(cat "$HOME/.cache/wal/wal")"
+    picname="$(basename "$picpath")"
+    picmesg="paperplane landed at '$picname' international"
+
     xrdb -merge "$HOME/.Xresources"
     dwm-msg run_command xrdb
     colorxpet
     colorbaby
-    setsid -f herbe "paperplane landed  " " " "$name"
-    echo "$(date '+%a_%y%m%d_%I:%M%P'):   paperplane landed at '$name' international" >> "$HOME/.cache/scripts/paperplane.log"
+
+    setsid -f herbe "paperplane landed  " " " "$picname"
+
+    echo "$stamp:   $picmesg" >> "$HOME/.cache/scripts/paperplane.log"
 else
+    picpath="$(cat "$HOME/.cache/wal/wal")"
+    picname="$(basename "$picpath")"
+    picmesg="paperplane crashed into '$picname' airport"
+
     setsid -f herbe "  paperplane crashed!" " " "  wallpaper not set."
-    echo "$(date '+%a_%y%m%d_%I:%M%P'):   paperplane crashed into '$name' airport..." >> "$HOME/.cache/scripts/paperplane.log"
+
+    echo "$stamp:   $picmesg" >> "$HOME/.cache/scripts/paperplane.log"
 fi

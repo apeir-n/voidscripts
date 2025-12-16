@@ -1,18 +1,30 @@
 #!/bin/sh
 
 [ -z "$1" ] && setsid -f herbe "no paper sent to paperplane  " && exit 1
-name="$(basename $1)"
+stamp="$(date '+%a_%y%m%d_%I:%M%P')"
+name="$(basename "$1")"
 
 setsid -f herbe "folding paper with pywal..."
 
-if timeout 6s wal --cols16 -a 40 -i "$1" >/dev/null 2>&1; then
+if timeout 6s wal --cols16 --saturate 0.2 -a 40 -i "$1" >/dev/null 2>&1; then
+    picpath="$1"
+    picname="$(basename "$picpath")"
+    picmesg="paperplane landed at '$picname' international"
+
     xrdb -merge $HOME/.Xresources
     dwm-msg run_command xrdb
     colorxpet
     colorbaby
+
     setsid -f herbe "paperplane landed  " " " "$name"
-    echo "$(date '+%a_%y%m%d_%I:%M%P'):   paperplane landed at '$name' international" >> "$HOME/.cache/scripts/paperplane.log"
+
+    echo "$stamp:   $picmesg" >> "$HOME/.cache/scripts/paperplane.log"
 else
+    picpath="$1"
+    picname="$(basename "$picpath")"
+    picmesg="paperplane crashed into '$picname' airport"
+
     setsid -f herbe "  paperplane crashed!" " " "  wallpaper not set."
-    echo "$(date '+%a_%y%m%d_%I:%M%P'):   paperplane crashed into '$name' airport..." >> "$HOME/.cache/scripts/paperplane.log"
+
+    echo "$stamp:   $picmesg" >> "$HOME/.cache/scripts/paperplane.log"
 fi

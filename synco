@@ -2,8 +2,6 @@
 
 cd "$HOME/Documents/obsidian_vault"
 git add .
-
-if git commit -m "$(gessage vaultbackup)"; then
-    git pull --rebase   && setsid -f herbe "  obsidian vault pulled" || setsid -f herbe "  pull failed"
-    git push            && setsid -f herbe "  obsidian vault synced" || setsid -f herbe "  sync failed"
-fi
+git commit -m "$(gessage vaultbackup)"
+git pull --rebase   && setsid -f herbe "  obsidian vault pulled" || setsid -f herbe "  pull failed"
+git push            && setsid -f herbe "  obsidian vault synced" || setsid -f herbe "  sync failed"
