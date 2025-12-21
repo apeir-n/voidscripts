@@ -2,7 +2,7 @@
 
 . $HOME/scripts/status/notify.sh
 
-clock=$(date '+%I')
+clock=$(sldate '+%I')
 
 case $clock in
     00) icon="󱑊" ;; 
@@ -21,8 +21,8 @@ case $clock in
 esac
 
 case $BLOCK_BUTTON in
-    1) notify 260 "$(date)" ;;
-    3) setsid -f xterm -geometry 100x20 -fa "monospace:pixelsize=14" -e /home/ch_rism_/.local/share/cargo/bin/tuime --format "%I:%M" -f font3d -c cyan -c green ;;
+    1) notify 260 "$(sldate)" ;;
+    3) slsetsid -f xterm -geometry 100x20 -fa "monospace:pixelsize=14" -e /home/ch_rism_/.local/share/cargo/bin/tuime --format "%I:%M" -f font3d -c cyan -c green ;;
 esac
 
-date "+$icon  %I:%M%P ] "
+sldate "+$icon  %I:%M%p ] " | sltr '[:upper:]' '[:lower:]'

@@ -1,0 +1,114 @@
+#!/bin/sh
+
+style () {
+    local text="$1"
+    local brdr="$2"
+    shift 2
+    gum style                       \
+        --foreground="$text"        \
+        --border="rounded"          \
+        --border-foreground="$brdr" \
+        "$@"
+}
+
+style 10 11 "  updating homebrew packages   "
+style 12 11 " updating homebrew... "
+sleep 1
+style 11 10 " upgrading packages... "
+sleep 1
+style 10 9 " cleaning up... "
+sleep 1
+style 12 13 "  homebrew update complete.   "
+echo
+
+ports=$(
+    gum choose                      \
+        --header="update macports?" \
+        --cursor="- "               \
+        --header.foreground=10      \
+        --cursor.foreground=9       \
+        --item.foreground=13        \
+        "yes" "no"
+    )
+case "$ports" in
+    yes)
+        style 10 11 "  updating macports   "
+        style 11 10 " upgrading ports & deps... "
+        sleep 1
+        style 12 11 " running macports update... "
+        sleep 1
+        style 12 13 "  macports update complete.   "
+        echo
+        ;;
+    no) 
+        style 10 11 " skipped ports update. "
+        echo
+        ;;
+esac
+
+while true; do
+    choice=$(
+        gum choose                                              \
+            --header="update lanugage build system packages?"   \
+            --cursor="- "                                       \
+            --header.foreground=10                              \
+            --cursor.foreground=9                               \
+            --item.foreground=13                                \
+            "yes" "no" "py" "rs" "go"
+        )
+    case "$choice" in
+        yes)
+            style 14 9 " beginning language package updater. "
+            sleep 1
+
+            style 13 12 " updating python packages with pipx: "
+            sleep 1
+            style 12 13 " pipx update succeeded   "
+            sleep 1
+            style 12 13 "   pipx update failed "
+
+            style 12 11 " updating rust packages with cargo: "
+            sleep 1
+            style 11 12 " cargo update succeeded   "
+            sleep 1
+            style 11 12 "   cargo update failed "
+
+            style 11 10 " updating go packages with gup: "
+            sleep 1
+            style 10 11 " gup update succeeded   "
+            sleep 1
+            style 10 11 "   gup update failed "
+
+            style 14 9 " language packages updated. "
+            break
+            ;;
+        no)
+            style 10 11 " bye! "
+            break
+            ;;
+        py)
+            style 13 12 " updating python packages with pipx: "
+            sleep 1
+            style 12 13 " pipx update succeeded   "
+            sleep 1
+            style 12 13 "   pipx update failed "
+            ;;
+        rs)
+            style 12 11 " updating rust packages with cargo: "
+            sleep 1
+            style 11 12 " cargo update succeeded   "
+            sleep 1
+            style 11 12 "   cargo update failed "
+            ;;
+        go)
+            style 11 10 " updating go packages with gup: "
+            sleep 1
+            style 10 11 " gup update succeeded   "
+            sleep 1
+            style 10 11 "   gup update failed "
+            ;;
+        *)
+            style 7 8 " invalid response. "
+            ;;
+    esac
+done

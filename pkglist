@@ -1,3 +1,10 @@
 #!/bin/sh
 
-xpkg -m | dmenu -bw 3 -l 25
+case "$1" in
+    "")
+        xpkg -m | dmenu -bw 3 -l 25
+        ;;
+    "a")
+        xpkg | dmenu -bw 3 -l 25
+        ;;
+esac

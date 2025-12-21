@@ -11,25 +11,41 @@ style () {
         "$@"
 }
 
-VOIDATA="$HOME/Documents/void"
+pupdate () {
+    style 13 12 " updating python packages with pipx: "
+    pipx upgrade-all                                    \
+        && style 12 13 " pipx update succeeded   "     \
+        || style 12 13 "   pipx update failed "
+}
 
-style 10 11 "  updating void linux  "
+rupdate () {
+    style 12 11 " updating rust packages with cargo: "
+    cargo install-update -a                             \
+        && style 11 12 " cargo update succeeded   "    \
+        || style 11 12 "   cargo update failed "
+}
 
-style 13 12 "backing up package list..."
-xpkg -m > $VOIDATA/pkglist.txt
+gupdate () {
+    style 11 10 " updating go packages with gup: "
+    gup update                                          \
+        && style 10 11 " gup update succeeded   "      \
+        || style 10 11 "   gup update failed "
+}
 
-style 12 11 "running full system upgrade..."
+style 10 11 "   updating void linux   "
+
+style 12 11 " running system upgrade... "
 doas xbps-install -Su
 
-style 11 10 "cleaning orphaned packages..."
+style 11 10 " cleaning orphaned packages... "
 doas xbps-remove -o
 
-style 10 9 "updating source tree..."
+style 10 9 " updating source tree... "
 cd $HOME/.local/share/void-packages
 git checkout master
-git pull upstream master
+git pull
 
-setsid -f herbe "  void updated.  "
+setsid -f herbe "   void updated.   "
 
 echo
 
@@ -42,48 +58,34 @@ while true; do
             --cursor.foreground=9                                       \
             --item.foreground=13                                        \
             "yes" "no" "py" "rs" "go"
-        )
+            )
     case "$choice" in
         yes)
-            style 14 9 "beginning language package updater."
+            style 14 9 " beginning language package updater. "
             sleep 1
 
-            style 13 12 "updating python packages with pipx:"
-            pipx upgrade-all
+            pupdate
+            rupdate
+            gupdate
 
-            style 12 11 "updating rust packages with cargo:"
-            cargo install-update -a
-
-            style 11 10 "updating go packages with gup:"
-            gup update
-
-            style 14 9 "language packages updated."
+            style 14 9 " language packages updated. "
             break
             ;;
         no)
-            style 10 11 "skipped lang packages update."
+            style 10 11 " bye! "
             break
             ;;
         py)
-            style 13 12 "updating python packages with pipx:"
-            pipx upgrade-all
-            style 14 9 "python packages updated."
-            break
+            pupdate
             ;;
         rs)
-            style 12 11 "updating rust packages with cargo:"
-            cargo install-update -a
-            style 14 9 "rust packages updated."
-            break
+            rupdate
             ;;
         go)
-            style 11 10 "updating go packages with gup:"
-            gup update
-            style 14 9 "go packages updated."
-            break
+            gupdate
             ;;
         *)
-            style 7 8 "invalid response."
+            style 7 8 " invalid response. "
             ;;
     esac
 done
