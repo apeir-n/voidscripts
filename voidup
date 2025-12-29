@@ -68,7 +68,7 @@ while true; do
             rupdate
             gupdate
 
-            style 14 9 " language packages updated. "
+            style 9 14 " language packages updated. "
             break
             ;;
         no)
