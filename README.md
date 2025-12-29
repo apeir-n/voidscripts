@@ -7,19 +7,19 @@ these are scripts that i use on my system running void linux. most of these were
 this readme is just notes on each script. it's laid out as the name of the script and then a bulleted list of information beneath it. i don't really like having excessive code comments, especially in the scripts i interact with and edit frequently, so i decided to put explanations and relevant info in this readme instead. i prefer to name my scripts without extensions so they're more natural to call from the command line. i symlink the ones i use frequently into my `$PATH` like `ln -s ~/scripts/hii ~/.local/bin`
 
 >[!note]
-> you may see coreutils prefixed with `sl`, like `slcat` and `slsetsid`, which is what i named the [sbase](http://core.suckless.org/sbase/) and [ubase](http://core.suckless.org/ubase/) versions of coreutils when i built them. i wanted to try them out without uninstalling my gnu coreutils or having any namespace conflicts. you can find the configuration for that in my [voiddots/builds](https://github.com/apeir-n/voiddots/tree/master/builds) repo.
+> you may see coreutils prefixed with `sl`, like `slcat` and `slsetsid`, which is what i named the [sbase](http://core.suckless.org/sbase/) and [ubase](http://core.suckless.org/ubase/) versions of coreutils when i built them. i wanted to try them out without uninstalling my gnu coreutils or having any namespace conflicts. 
 
 ---
 
 info on the 2 subdirectories in this repo:
 
-`/etc/`
+`etc/`
 - basically just what it sounds like
 - stuff that i don't want to delete yet or other random shit
 - there's an updater script for arch in there that i was pretty proud of when i was running arch, feel free to steal
 - also an `/etc/assets` subdir for images
 
-`/status/`
+`status/`
 - stuff mostly for my dwm status bar
 - they're all explained in their own readme file
 
