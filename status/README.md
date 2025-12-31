@@ -1,6 +1,6 @@
 # status modules
 
-the scripts in this directory are mostly used in my dwm status bar, but they can easily be adapted to be used in other status bars or for other stuff that takes standard input. the scripts are run on signals managed by dwmblocks (see `/builds/dwmblocks-async/` in my [voiddots repo](https://github.com/apeir-n/voiddots) if you're interested).
+the scripts in this directory are mostly used in my dwm status bar (for linux obviously), but they can easily be adapted to be used in other status bars or for other stuff that takes standard input. the scripts are run on signals managed by dwmblocks-async
 
 ---
 
@@ -30,7 +30,6 @@ an example of the whole bar would look like:
 - my a4 config is configured to look like dvtm, which is meant to look like dwm
 - eg:
     - `[ tty ][ |▒| 66% ][ |.:| 250921 ][ (-) 03:26pm ]`
-- you can find my `a4.ini` config file in my [voiddots repo](https://github.com/apeir-n/voiddots)
 
 `notify.sh`
 - herbe is what i use for notifications, and it doesn't support changing settings via cli arguments
@@ -77,14 +76,13 @@ an example of the whole bar would look like:
     - dwmblocks works by running scripts by a signal number specified in blocks.h
     - usually the signals are managed by dwmblocks itself, providing a timer for each signal
     - when you want to run things manually and not timer-based, you need to send a signal to dwmblocks corresponding to the desired block
-    - in my case, play.sh is given by signal 5 in blocks.h
+    - in my case, play.sh is given by rt signal 5 in blocks.h
 - the icon in this script denotes the play status in mpd, and the percentage denotes the volume
 - so i need to handle both of those things on a signal in order for the icon and percentage to update in real time
 - this is achieved by running `pkill -RTMIN+5 dwmblocks`:
     - whenever i change the volume
-        - currently handled in ~/.xbindkeysrc, but i might change that at some point
-            - increase: `amixer set Master 5%+ unmute && pkill -RTMIN+5 dwmblocks`
-            - decrease: `amixer set Master 5%- unmute && pkill -RTMIN+5 dwmblocks`
+        - like `pactl blah blah && pkill -RTMIN+5 dwmblocks`
+        - example in my [dwm build's config.def.h](https://github.com/apeir-n/voiddots/blob/master/builds/dwm/config.def.h)
     - whenever the play status changes in mpd
         - handled in the script `mpc_watch`
             - a loop that executes the signal when `mpc idle player` returns any event
@@ -106,12 +104,12 @@ an example of the whole bar would look like:
 
 `void.sh`
 - i just put the name of the os/environment i'm running dwm on in this block
-- i also use dwm on freebsd and openbsd
-- left click currently opens `wtfutil` for a system dashboard
-- right click is a dmenu script with options to:
+- i also use dwm on bsd and mac and stuff
+- left click is a dmenu script with options to:
     - logout
     - reboot
     - poweroff
+- right click currently opens `wtfutil` for a system dashboard
 
 `weather.sh`
 - previously entirely used wttr.in for the temperature/icon, left mouse click, and right mouse click
