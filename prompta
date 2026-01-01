@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-setopt prompt_subst
-
 function promptoid() {
     echo "%K{${1}}%F{${2}}${3}%k%f"
 }
@@ -9,16 +7,23 @@ function promptoid() {
 function promptina() {
     local nl=$'\n'
     local mer=$(date '+%P')
-    #local clk=$(promptoid 1 0 " %D{%I:%M}${mer} ")
-    #local zsh=$(promptoid 2 0 " zsh ")
-    #local me=$(promptoid 5 0 " %n ")
-    #local us=$(promptoid 6 0 " %m ")
 
-    local clk=$(promptoid 9 0 " %D{%I:%M}${mer} ")
-    local zsh=$(promptoid 10 0 " zsh ")
-    local me=$(promptoid 12 0 " %n ")
-    local us=$(promptoid 14 0 " %m ")
+    case "$1" in
+        "dark")
+            local clk=$(promptoid 1 0 " %D{%I:%M%p} ")
+            local zsh=$(promptoid 2 0 " zsh ")
+            local me=$(promptoid 4 0 " %n ")
+            local us=$(promptoid 6 0 " %m ")
+            ;;
+        "light")
+            local clk=$(promptoid 9 0 " %D{%I:%M}${mer} ")
+            local zsh=$(promptoid 10 0 " zsh ")
+            local me=$(promptoid 12 0 " %n ")
+            local us=$(promptoid 14 0 " %m ")
+            ;;
+    esac
+
     echo "${nl}${clk}${zsh}${me}${us}${nl}%F{7}┌── %~${nl}└─%f "
 }
 
-PROMPT="$(promptina)"
+PROMPT="$(promptina dark)"

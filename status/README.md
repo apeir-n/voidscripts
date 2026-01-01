@@ -87,7 +87,7 @@ an example of the whole bar would look like:
         - handled in the script `mpc_watch`
             - a loop that executes the signal when `mpc idle player` returns any event
     - so both of of those events are what update the block
-    - also, `pkill -RTMIN+5 dwmblocks` just sends 'signal #5' to dwmblocks, telling it to 'run play.sh'
+    - also, `pkill -RTMIN+5 dwmblocks` just sends 'rt signal #5' to dwmblocks, telling it to 'run play.sh'
 - that's the main functionality. aside from that,
     - left click sends herbe notification with artist and song title
     - middle click toggles play/pause
@@ -127,12 +127,14 @@ an example of the whole bar would look like:
 - all are local binaries that happen to be written in go
     - status: `yr now --json`
         - pretty versatile weather cli, optional json output parsed with `jq`
+        - the fahrenheit option doesn't work with the json output for some reason, so i just use the built in math in `jq` to get it
     - left click: `stormy --compact`
         - small ascii weather report, sent to herbe as notification
         - also replacing the unicode bar `―` with a regular ascii dash `-` using sed because herbe doesn't render it properly
     - right click: `wego`
         - output almost identical to wttr.in
         - now hung with `less -R` because i just realized you can use ansi colors in less with -R...
+            - (`less -r` seems to be the alternative on bsd utils btw)
 - much faster and more reliable
 - unfortunately `yr`'s json output for icons (`"codeSymbol"`) has an insane amount of options
 - i put them all in an array in `wearray.sh` with lots of repetition and test against it for the icon
