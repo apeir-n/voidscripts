@@ -51,4 +51,4 @@ case $BLOCK_BUTTON in
     #3) setsid -f st -e battop ;;
 esac
 
-slecho "$icon  $charge%"
+printf "%s  %d%%" "$icon" "$charge"

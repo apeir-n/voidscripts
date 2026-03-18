@@ -76,7 +76,8 @@ info on the 2 subdirectories in this repo:
 - this is a little cli brightness menu that changes the brightness with xrandr
 - changing the brightness with xrandr is pure software rendering
     - doesn't interface with your hardware's normal brightness controls
-- i made this because my thinkpad's screen is pretty dark and dull looking
+- i made this because it seems like all my various machines don't have very good screens or brightness controls (or maybe i'm just spoiled having mainly used macs forever)
+    - my thinkpad's screen is particularly bad, it's pretty dark and dull looking
     - but keeping the xrandr brightness high all the time makes it look washed out in some contexts and makes some ui elements invisible
     - being able to dial it in and out with a menu instead of just running the raw commands is nice
 - runs in a loop where the input line is overwritten, so it's more like a mini tui

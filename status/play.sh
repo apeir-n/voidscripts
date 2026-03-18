@@ -34,7 +34,8 @@ case $BLOCK_BUTTON in
     1) slsetsid -f herbe "$artist" "$title" ;;
     #2) toggle && pkill -RTMIN+5 dwmblocks ;;
     2) toggle ;;
-    3) slsetsid -f xterm -geometry 96x24 -fa "monospace:pixelsize=14" -e rmpc ;;
+    3) slsetsid -f xterm -geometry 96x24 -fa "terminus:pixelsize=14" -e rmpc ;;
 esac
 
-echo "$play  $vol"
+#echo "$play  $vol"
+printf "%s  %s" "$play" "$vol"

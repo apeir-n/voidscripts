@@ -13,23 +13,23 @@ style () {
 
 pupdate () {
     style 13 12 " updating python packages with pipx: "
-    pipx upgrade-all                                    \
-        && style 12 13 " pipx update succeeded   "     \
-        || style 12 13 "   pipx update failed "
+    pipx upgrade-all                                        \
+        && style 12 13 " python pkg updates successful   " \
+        || style 12 13 "   python pkg updates failed "
 }
 
 rupdate () {
     style 12 11 " updating rust packages with cargo: "
-    cargo install-update -a                             \
-        && style 11 12 " cargo update succeeded   "    \
-        || style 11 12 "   cargo update failed "
+    cargo install-update -a                                 \
+        && style 11 12 " rust pkg updates successful   "   \
+        || style 11 12 "   rust pkg updates failed "
 }
 
 gupdate () {
     style 11 10 " updating go packages with gup: "
-    gup update                                          \
-        && style 10 11 " gup update succeeded   "      \
-        || style 10 11 "   gup update failed "
+    gup update                                              \
+        && style 10 11 " go pkg updates successful   "     \
+        || style 10 11 "   go pkg updates failed "
 }
 
 style 10 11 "   updating void linux   "

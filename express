@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#echo "(((x - y) - (y >> x)) / ((x - c) - (c + y)))" | ./express
+#(((x-y)-(y>>x))\((x-c)-(c+y)))
+
+sed 's/ //g;s/\//\\/g'

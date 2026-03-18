@@ -40,4 +40,4 @@ esac
 
 datecmd=$(sldate "+|.:| %y%m%d ][ $clock %I:%M%P")
 
-echo "[ tty ][ $battery $charge% ][ $datecmd ]"
+printf "[ tty ][ %s %d%% ][ %s ]" "$battery" "$charge" "$datecmd"
