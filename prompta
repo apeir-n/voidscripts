@@ -21,9 +21,15 @@ function promptina() {
             local me=$(promptoid 12 0 " %n ")
             local us=$(promptoid 14 0 " %m ")
             ;;
+        "alt")
+            local clk=$(promptoid 10 0 " %D{%I:%M}${mer} ")
+            local zsh=$(promptoid 12 0 " zsh ")
+            local me=$(promptoid 13 0 " %n ")
+            local us=$(promptoid 14 0 " %m ")
+            ;;
     esac
 
     echo "${nl}${clk}${zsh}${me}${us}${nl}%F{7}┌── %~${nl}└─%f "
 }
 
-PROMPT="$(promptina dark)"
+PROMPT="$(promptina light)"

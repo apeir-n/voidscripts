@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+for d in */; do
+    cd "$d"
+
+    if [ ! -d ".git" ]; then
+        printf "\n%s is not a git repo. continuing...\n" "$d"
+        cd ..
+        continue
+    fi
+
+    printf "\n>=========================================================<\n"
+    printf "pulling in dir %s\n" "$d"
+    git pull
+    cd ..
+done

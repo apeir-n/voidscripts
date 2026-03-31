@@ -1,3 +1,10 @@
 #!/bin/sh
 
-cc -o "${1}" "${1}.c"
+case "$1" in
+    "-s"|"-static")
+        cc -static-pie -o "${2}" "${2}.c"
+        ;;
+    *)
+        cc -o "${1}" "${1}.c"
+        ;;
+esac

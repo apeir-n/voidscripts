@@ -1,0 +1,19 @@
+#!/bin/sh
+
+mkfifo /tmp/webcam.pipe
+
+ffmpeg \
+    -f v4l2 \
+    -i /dev/video0 \
+    -vcodec libx264 \
+    -pix_fmt yuv420p \
+    -preset ultrafast \
+    -crf 23 \
+    -f mpegts \
+    /tmp/webcam.pipe &
+
+ffplay \
+    -f mpegts \
+    /tmp/webcam.pipe 
+
+rm /tmp/webcam.pipe
