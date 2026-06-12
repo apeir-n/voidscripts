@@ -1,0 +1,8 @@
+#!/bin/sh
+
+dir="$HOME/scripts/snips"
+lang="$(ls "$dir" | dmenu -bw 3)"
+snip="$(ls "$dir/$lang" | dmenu -bw 3)"
+# cat "$dir/$lang/$snip" | xclip -selection clipboard
+sh "$dir/$lang/$snip" &
+

@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+# function λ () {
+# 	"$@"
+# }
+xdotool type "$(printf "\u03bb")"

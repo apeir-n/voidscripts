@@ -1,16 +1,35 @@
 #!/bin/zsh
 
+function kratom () {
+    local base=(3 9)
+    local tens=${base[((RANDOM % 2 + 1))]}
+    local ones=$((RANDOM % 8))
+
+    [[ $tens == 3 && $ones == 0 ]] && tens=9
+    [[ $tens == 9 && $ones == 7 ]] && tens=3
+
+    printf "\033[%d%dm%s\033[0m\n" "${tens}" "${ones}" "${*}"
+}
+
 for d in */; do
     cd "$d"
 
     if [ ! -d ".git" ]; then
-        printf "\n%s is not a git repo. continuing...\n" "$d"
+        message="$(printf "\n%s is not a git repo. continuing...\n" "$d")"
+        kratom "$message"
         cd ..
         continue
     fi
 
-    printf "\n>=========================================================<\n"
-    printf "pulling in dir %s\n" "$d"
+    delimit="$(printf "\n>=========================================================<\n")"
+    kratom "$delimit"
+
+    message="$(printf "pulling in dir %s\n" "$d")"
+    kratom "$message"
+
     git pull
     cd ..
 done
+
+alldone="$(printf "\nall done!\n")"
+kratom "$alldone"

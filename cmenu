@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+typeset -A list=(
+    [lambda]="λ"
+    [mu]="μ"
+    [theta]="θ"
+    [alpha]="α"
+    [beta]="β"
+)
+
+function lister () {
+    for key in "${(@k)list}"; do
+        printf "%s\n" "$key"
+    done
+}
+
+choice="$(lister | dmenu -bw 3)"
+xdotool type "$list[$choice]"
+
+# # less elegant version that prints key & val
+# # and awks out the key to write the val
+# function lister () {
+#     for key val in "${(@kv)list}"; do
+#         printf "%s : %s\n" "$key" "$val"
+#     done
+# }
+
+# choice="$(lister | dmenu -bw 3 | awk '{print $1}')"
+# xdotool type "$list[$choice]"

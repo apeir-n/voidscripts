@@ -1,10 +1,30 @@
 #!/bin/sh
 
-chosen=$(printf "%s\n" "logout" "reboot" "shutdown" | dmenu -bw 3)
+chosen="$(
+    printf "%s\n" \
+    "logout"      \
+    "reboot"      \
+    "shutdown"    \
+    "sleep"       \
+    | dmenu -bw 3
+)"
 
 case "$chosen" in
-    "logout") killall dwm ;;
-    "reboot") doas reboot ;;
-    "shutdown") doas shutdown -P now ;;
-    *) exit 1 ;;
+    "logout")
+        killall xinit
+        ;;
+    "reboot")
+        doas reboot
+        ;;
+    "shutdown")
+        doas shutdown -P now
+        ;;
+    "sleep")
+        doas zzz                         \
+        > /tmp/power.txt 2>&1            \
+        && herbe "$(cat /tmp/power.txt)" &
+        ;;
+    *)
+        exit 1
+        ;;
 esac

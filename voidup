@@ -40,10 +40,10 @@ doas xbps-install -Su
 style 11 10 " cleaning orphaned packages... "
 doas xbps-remove -o
 
-style 10 9 " updating source tree... "
-cd $HOME/.local/share/void-packages
-git checkout master
-git pull
+# style 10 9 " updating source tree... "
+# cd $HOME/.local/share/void-packages
+# git checkout master
+# git pull
 
 setsid -f herbe "   void updated.   "
 

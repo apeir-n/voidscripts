@@ -7,6 +7,6 @@ case $BLOCK_BUTTON in
     3) slsetsid -f xterm -fa "terminus:pixelsize=14" -e calcurse ;;
 esac
 
-datecmd="$(date '+  %a_%y%m%d' | tr '[:upper:]' '[:lower:]')"
+datecmd="$(date '+  %y%m%d_%a' | tr '[:upper:]' '[:lower:]')"
 
 printf "%s" "$datecmd"

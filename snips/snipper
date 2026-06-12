@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+langdir="$HOME/scripts/snips"
+lang="$(ls "$langdir" | grep -v snipper | dmenu -bw 3)"
+
+snipdir="$langdir/$lang"
+snip="$(ls "$snipdir" | dmenu -bw 3)"
+
+"$snipdir/$snip"
